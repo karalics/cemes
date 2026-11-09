@@ -242,6 +242,10 @@ INSTALLED_APPS = [
     "mezzanine.boot",
     "mezzanine.conf",
     "mezzanine.core",
+    # The htmx/Alpine.js admin interface, served at /admin/. The classic
+    # Django/Grappelli admin stays available at /admin-classic/ - see
+    # urls.py. Remove this app to use only the classic admin.
+    "mezzanine.admin_htmx",
     "mezzanine.generic",
     "mezzanine.pages",
     "mezzanine.blog",

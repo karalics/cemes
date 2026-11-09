@@ -1,0 +1,36 @@
+{% extends "admin_htmx/base.html" %}
+{% load i18n %}
+
+{% block bodyclass %}delete-confirm{% endblock %}
+
+{% block content %}
+{% if perms_lacking %}
+  <p class="errornote">
+    {% blocktrans with name=object_name|default:opts.verbose_name obj=original %}Deleting the {{ name }} "{{ obj }}" would require deleting the following protected related objects:{% endblocktrans %}
+  </p>
+  <ul>{% for obj in perms_lacking %}<li>{{ obj }}</li>{% endfor %}</ul>
+{% elif protected %}
+  <p class="errornote">
+    {% blocktrans with name=opts.verbose_name obj=original %}Deleting the {{ name }} "{{ obj }}" would require deleting the following protected related objects:{% endblocktrans %}
+  </p>
+  <ul>{% for obj in protected %}<li>{{ obj }}</li>{% endfor %}</ul>
+{% else %}
+  <p>
+    {% blocktrans with name=opts.verbose_name obj=original %}Are you sure you want to delete the {{ name }} "{{ obj }}"? All of the following related items will be deleted:{% endblocktrans %}
+  </p>
+
+  <ul class="deleted-summary">
+    {% for model_name, count in model_count %}
+      <li>{{ count }} &times; {{ model_name }}</li>
+    {% endfor %}
+  </ul>
+
+  <ul class="deleted-objects">{{ deleted_objects|unordered_list }}</ul>
+
+  <form method="post" class="submit-row">
+    {% csrf_token %}
+    <button type="submit" class="button danger">{% trans "Yes, delete" %}</button>
+    <a class="button quiet" href="{{ changelist_url }}">{% trans "Cancel" %}</a>
+  </form>
+{% endif %}
+{% endblock %}

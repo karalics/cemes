@@ -1,0 +1,47 @@
+{% extends "admin_htmx/base.html" %}
+{% load i18n admin_modify %}
+
+{% block bodyclass %}changeform{% endblock %}
+
+{% block breadcrumbs_extra %}
+  <span aria-hidden="true">/</span>
+  <span>{% if change %}{{ original }}{% else %}{% trans "Add" %}{% endif %}</span>
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="change-form" novalidate
+      data-change-form>
+  {% csrf_token %}
+
+  {% if errors %}
+    <div class="errornote">
+      {% blocktrans count counter=errors|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+      {{ adminform.form.non_field_errors }}
+    </div>
+  {% endif %}
+
+  {% with admin_fieldsets=adminform %}
+    {% include "admin_htmx/includes/fieldset.html" %}
+  {% endwith %}
+
+  {% include "admin_htmx/includes/inlines.html" %}
+
+  <div class="submit-row">
+    <button type="submit" name="_save" class="button primary">{% trans "Save" %}</button>
+    <button type="submit" name="_continue" class="button">
+      {% trans "Save and continue editing" %}</button>
+    {% if perms.add and show_save_and_add_another %}
+      <button type="submit" name="_addanother" class="button">
+        {% trans "Save and add another" %}</button>
+    {% endif %}
+    {% if delete_url %}
+      <a class="button danger" href="{{ delete_url }}">{% trans "Delete" %}</a>
+    {% endif %}
+    <a class="button quiet" href="{{ changelist_url }}">{% trans "Cancel" %}</a>
+  </div>
+</form>
+
+{# Slug prepopulation reuses Django's own script, whose assets arrive #}
+{# with the form media. #}
+{% prepopulated_fields_js %}
+{% endblock %}

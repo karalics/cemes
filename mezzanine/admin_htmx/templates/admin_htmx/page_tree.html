@@ -1,0 +1,26 @@
+{% extends "admin_htmx/base.html" %}
+{% load i18n %}
+
+{% block bodyclass %}page-tree{% endblock %}
+
+{% block content_title %}<div class="page-head"><h1>{{ title }}</h1></div>{% endblock %}
+
+{% block content %}
+{% if content_models %}
+  <div class="content-types">
+    <span>{% trans "Add new" %}:</span>
+    {% for content_model in content_models %}
+      <a class="button" href="{{ content_model.add_url }}">{{ content_model.verbose_name }}</a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if tree %}
+  <div class="tree" data-page-tree data-ordering-url="{{ ordering_url }}">
+    {% include "admin_htmx/includes/page_branch.html" with nodes=tree %}
+  </div>
+  <p class="hint">{% trans "Drag a page to move it, or onto another page to nest it." %}</p>
+{% else %}
+  <p class="empty">{% trans "No pages yet." %}</p>
+{% endif %}
+{% endblock %}

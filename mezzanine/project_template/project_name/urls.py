@@ -18,7 +18,19 @@ admin.autodiscover()
 urlpatterns = i18n_patterns(
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
-    path("admin/", include(admin.site.urls)),
+    #
+    # Two admin interfaces are mounted. The htmx/Alpine.js interface is
+    # the one you work in. The classic Django/Grappelli admin stays
+    # mounted alongside it because Django's form widgets reverse their
+    # popups - related object lookups, the media library - against the
+    # "admin" URL namespace, and because it is the fallback if anything
+    # in the new interface gets in your way.
+    #
+    # To go back to only the classic admin, drop the first line here and
+    # move it to "admin/", then remove "mezzanine.admin_htmx" from
+    # INSTALLED_APPS.
+    path("admin/", include("mezzanine.admin_htmx.urls")),
+    path("admin-classic/", include(admin.site.urls)),
 )
 
 if settings.USE_MODELTRANSLATION:

@@ -1,0 +1,47 @@
+{% extends "admin_htmx/base.html" %}
+{% load i18n %}
+
+{% block bodyclass %}settings{% endblock %}
+
+{% block content %}
+{% if settings_form.errors %}
+  <div class="errornote">
+    {% trans "Please correct the errors below." %}
+    {{ settings_form.non_field_errors }}
+  </div>
+{% endif %}
+
+<form method="post" class="change-form settings-form">
+  {% csrf_token %}
+  {% regroup settings_form by group as setting_groups %}
+  {% for group in setting_groups %}
+    <fieldset class="module" x-data="{ open: {{ forloop.first|yesno:"true,false" }} }">
+      <legend>
+        <button type="button" class="fieldset-toggle" @click="open = !open"
+                :aria-expanded="open.toString()">
+          {{ group.grouper }}
+          <span class="chev" :class="open ? 'down' : ''" aria-hidden="true"></span>
+        </button>
+      </legend>
+      <div x-show="open" x-cloak>
+        {% for field in group.list %}
+          <div class="form-row {% if field.errors %}has-errors{% endif %}">
+            <div class="field-box">
+              {{ field.errors }}
+              {{ field.label_tag }}
+              {{ field }}
+              {% if field.help_text %}
+                <div class="help">{{ field.help_text|safe }}</div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% endfor %}
+
+  <div class="submit-row">
+    <button type="submit" class="button primary">{% trans "Save" %}</button>
+  </div>
+</form>
+{% endblock %}

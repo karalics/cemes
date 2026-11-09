@@ -1,0 +1,64 @@
+{% load i18n %}
+{% comment %}
+Renders one of the fieldsets of a ``helpers.AdminForm`` or
+``helpers.InlineAdminForm``. The iteration protocol - fieldset, line,
+field - is Django's, so admin classes declaring ``fieldsets``,
+``readonly_fields`` and ``radio_fields`` render correctly without
+knowing anything about this interface.
+{% endcomment %}
+{% for fieldset in admin_fieldsets %}
+  {% with collapsible=fieldset.classes %}
+  <fieldset class="module {{ fieldset.classes }}"
+    {% if "collapse" in fieldset.classes %}
+      x-data="{ open: {% if "collapse-open" in fieldset.classes %}true{% else %}false{% endif %} }"
+    {% endif %}>
+
+    {% if fieldset.name %}
+      {% if "collapse" in fieldset.classes %}
+        <legend>
+          <button type="button" class="fieldset-toggle" @click="open = !open"
+                  :aria-expanded="open.toString()">
+            {{ fieldset.name }}
+            <span class="chev" :class="open ? 'down' : ''" aria-hidden="true"></span>
+          </button>
+        </legend>
+      {% else %}
+        <legend>{{ fieldset.name }}</legend>
+      {% endif %}
+    {% endif %}
+
+    <div {% if "collapse" in fieldset.classes %}x-show="open" x-cloak{% endif %}>
+      {% if fieldset.description %}
+        <p class="fieldset-description">{{ fieldset.description|safe }}</p>
+      {% endif %}
+
+      {% for line in fieldset %}
+        <div class="form-row {% if line.errors %}has-errors{% endif %}
+                    {% if line.fields|length > 1 %}multi{% endif %}">
+          {% if line.fields|length == 1 %}{{ line.errors }}{% endif %}
+          {% for field in line %}
+            <div class="field-box field-{{ field.field.name }}
+                        {% if field.is_checkbox %}checkbox-row{% endif %}
+                        {% if hide_slug_field and field.field.name == "slug" %}is-hidden{% endif %}">
+              {% if line.fields|length > 1 and not field.is_readonly %}{{ field.errors }}{% endif %}
+              {% if field.is_checkbox %}
+                {{ field.field }}{{ field.label_tag }}
+              {% else %}
+                {{ field.label_tag }}
+                {% if field.is_readonly %}
+                  <div class="readonly">{{ field.contents }}</div>
+                {% else %}
+                  {{ field.field }}
+                {% endif %}
+              {% endif %}
+              {% if field.field.help_text %}
+                <div class="help">{{ field.field.help_text|safe }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </fieldset>
+  {% endwith %}
+{% endfor %}

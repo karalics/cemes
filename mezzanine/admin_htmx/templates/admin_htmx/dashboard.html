@@ -1,0 +1,70 @@
+{% extends "admin_htmx/base.html" %}
+{% load i18n %}
+
+{% block bodyclass %}dashboard{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="dashboard-grid">
+
+  <section class="card span-2">
+    <h2>{% trans "Content" %}</h2>
+    <div class="app-grid">
+      {% for group in nav_groups %}
+        <div class="app-card">
+          <h3>{{ group.name }}</h3>
+          <ul>
+            {% for model in group.models %}
+              <li>
+                <a href="{{ model.admin_url }}">{{ model.name }}</a>
+                {% if model.add_url %}
+                  <a class="quiet-link" href="{{ model.add_url }}">{% trans "Add" %}</a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>{% trans "My recent actions" %}</h2>
+    {% if log_entries %}
+      <ul class="activity">
+        {% for entry in log_entries %}
+          <li class="action-{{ entry.action }}">
+            {% if entry.url %}
+              <a href="{{ entry.url }}">{{ entry.repr }}</a>
+            {% else %}
+              <span>{{ entry.repr }}</span>
+            {% endif %}
+            <small>{{ entry.type }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="empty">{% trans "No actions yet." %}</p>
+    {% endif %}
+  </section>
+
+  {% if recent_comments is not None %}
+    <section class="card">
+      <h2>{% trans "Recent comments" %}</h2>
+      {% if recent_comments %}
+        <ul class="activity">
+          {% for comment in recent_comments %}
+            <li>
+              <a href="{{ comment.get_absolute_url }}">{{ comment.user_name }}</a>
+              <small>{{ comment.comment|truncatewords:12 }}</small>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="empty">{% trans "No comments yet." %}</p>
+      {% endif %}
+    </section>
+  {% endif %}
+
+</div>
+{% endblock %}

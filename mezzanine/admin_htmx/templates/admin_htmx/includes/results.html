@@ -1,0 +1,186 @@
+{% load i18n %}
+{% comment %}
+The whole results region, swapped as one unit by htmx when searching,
+filtering, sorting or paginating.
+
+The search form and the filter sidebar are both inside the swapped
+region on purpose. Each one has to carry the other's state - a search
+must keep the active filters, a filter must keep the query - and the
+only way they stay in step is if every swap re-renders both from the
+same set of parameters.
+{% endcomment %}
+<div id="cl-main" class="cl-main{% if filter_specs %} has-filters{% endif %}">
+
+  {% if cl.search_fields %}
+    {% comment %}
+    The form carries method and action so searching still works with
+    JavaScript off. The input repeats hx-get because htmx ignores an
+    empty one, and adds hx-include so a keystroke submits the whole
+    form rather than just the query. hx-preserve keeps the live input
+    node - and with it the caret and focus - across the swap it causes.
+    {% endcomment %}
+    <form class="search-form" role="search" autocomplete="off"
+          method="get" action="{{ request.path }}"
+          hx-get="{{ request.path }}" hx-target="#cl-main" hx-swap="outerHTML"
+          hx-push-url="true" hx-indicator="#cl-indicator">
+      <input type="search" name="q" id="cl-search" value="{{ cl.query }}"
+             placeholder="{% firstof cl.search_help_text _("Search") %}"
+             aria-label="{% trans "Search" %}"
+             hx-get="{{ request.path }}" hx-include="closest form"
+             hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true"
+             hx-indicator="#cl-indicator"
+             hx-trigger="keyup changed delay:300ms, search"
+             hx-preserve="true">
+      {% for key, value in cl.params.items %}
+        {% if key != "q" and key != "p" %}
+          <input type="hidden" name="{{ key }}" value="{{ value }}">
+        {% endif %}
+      {% endfor %}
+      <button type="submit" class="button">{% trans "Search" %}</button>
+      <span id="cl-indicator" class="htmx-indicator" aria-hidden="true"></span>
+    </form>
+  {% endif %}
+
+  {% if date_hierarchy and date_hierarchy.show %}
+    <div class="date-hierarchy">
+      {% if date_hierarchy.back %}
+        <a href="{{ date_hierarchy.back.link }}" hx-get="{{ date_hierarchy.back.link }}"
+           hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true">
+          &laquo; {{ date_hierarchy.back.title }}</a>
+      {% endif %}
+      <ul>
+        {% for choice in date_hierarchy.choices %}
+          <li><a href="{{ choice.link }}" hx-get="{{ choice.link }}"
+                 hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true">
+            {{ choice.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <div class="cl-body">
+    <div class="cl-results">
+      <form method="post" class="results-form">
+        {% csrf_token %}
+
+        {% if action_form and cl.result_count %}
+          <div class="action-bar" x-data="{ chosen: '' }">
+            <label class="sr-only" for="action-select">{% trans "Action" %}</label>
+            <select id="action-select" name="action" x-model="chosen">
+              {% for value, label in action_choices %}
+                <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+            <input type="hidden" name="index" value="0">
+            <input type="hidden" name="select_across" value="0">
+            <button type="submit" class="button" :disabled="!chosen">{% trans "Go" %}</button>
+            <span class="action-counter" data-action-counter
+                  data-label-selected="{% trans "selected" %}"></span>
+          </div>
+        {% endif %}
+
+        {% if cl.result_count %}
+          <div class="table-wrap">
+            <table class="results">
+              <thead>
+                <tr>
+                  {% for header in headers %}
+                    <th scope="col" {{ header.class_attrib }}>
+                      {% if header.sortable %}
+                        {% if header.sort_priority > 0 %}
+                          <div class="sort-options">
+                            <a href="{{ header.url_toggle }}" hx-get="{{ header.url_toggle }}"
+                               hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true"
+                               class="toggle {% if header.ascending %}ascending{% else %}descending{% endif %}"
+                               title="{% trans "Toggle sorting" %}"></a>
+                            {% if header.url_remove %}
+                              <a href="{{ header.url_remove }}" hx-get="{{ header.url_remove }}"
+                                 hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true"
+                                 class="sort-remove" title="{% trans "Remove from sorting" %}">&times;</a>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                        <a href="{{ header.url_primary }}" hx-get="{{ header.url_primary }}"
+                           hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true">
+                          {{ header.text|capfirst }}</a>
+                      {% elif forloop.first and action_form %}
+                        {# The action checkbox column, prepended by ChangeList. #}
+                        <input type="checkbox" class="select-all"
+                               aria-label="{% trans "Select all on this page" %}"
+                               data-select-all>
+                      {% else %}
+                        {{ header.text|capfirst }}
+                      {% endif %}
+                    </th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in rows %}
+                  <tr>{% for cell in row %}{{ cell }}{% endfor %}</tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          {% if cl.formset %}
+            {{ cl.formset.management_form }}
+            <div class="submit-row inline-save">
+              <button type="submit" name="_save" class="button primary">
+                {% trans "Save changes" %}</button>
+            </div>
+          {% endif %}
+        {% else %}
+          <p class="empty">
+            {% blocktrans with name=opts.verbose_name_plural %}No {{ name }} found.{% endblocktrans %}
+          </p>
+        {% endif %}
+      </form>
+
+      <div class="paginator">
+        <span class="count">
+          {% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %}
+          {% if cl.result_count != cl.full_result_count %}
+            <a href="?" hx-get="?" hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true">
+              ({% blocktrans with total=cl.full_result_count %}{{ total }} total{% endblocktrans %})</a>
+          {% endif %}
+        </span>
+        {% if page_numbers %}
+          <nav class="pages" aria-label="{% trans "Pagination" %}">
+            {% for label, query, current in page_numbers %}
+              {% if query %}
+                <a href="{{ query }}" hx-get="{{ query }}" hx-target="#cl-main"
+                   hx-swap="outerHTML" hx-push-url="true"
+                   class="{% if current %}current{% endif %}"
+                   {% if current %}aria-current="page"{% endif %}>{{ label }}</a>
+              {% else %}
+                <span class="gap">{{ label }}</span>
+              {% endif %}
+            {% endfor %}
+          </nav>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if filter_specs %}
+      <aside class="cl-filters" aria-label="{% trans "Filters" %}">
+        <h2>{% trans "Filter" %}</h2>
+        {% for spec in filter_specs %}
+          <div class="filter" x-data="{ open: true }">
+            <button type="button" class="filter-title" @click="open = !open"
+                    :aria-expanded="open.toString()">{{ spec.title|capfirst }}</button>
+            <ul x-show="open" x-cloak>
+              {% for choice in spec.choices %}
+                <li class="{% if choice.selected %}selected{% endif %}">
+                  <a href="{{ choice.query_string }}" hx-get="{{ choice.query_string }}"
+                     hx-target="#cl-main" hx-swap="outerHTML" hx-push-url="true">
+                    {{ choice.display }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </aside>
+    {% endif %}
+  </div>
+</div>

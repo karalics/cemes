@@ -1,0 +1,28 @@
+{% extends "admin_htmx/base.html" %}
+{% load i18n %}
+
+{% block bodyclass %}changelist{% endblock %}
+
+{% block content_title %}
+<div class="page-head">
+  <h1>{{ title }}</h1>
+  {% if perms.add %}
+    <a class="button primary" href="{{ add_url }}">
+      {% blocktrans with name=opts.verbose_name %}Add {{ name }}{% endblocktrans %}</a>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+{% if content_models %}
+  {# Content typed models, eg the Page subclasses, are added directly. #}
+  <div class="content-types">
+    <span>{% trans "Add new" %}:</span>
+    {% for content_model in content_models %}
+      <a class="button" href="{{ content_model.add_url }}">{{ content_model.verbose_name }}</a>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% include "admin_htmx/includes/results.html" %}
+{% endblock %}
