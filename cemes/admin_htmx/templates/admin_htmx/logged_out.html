@@ -1,0 +1,17 @@
+{% load i18n static %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:"en" }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{% trans "Logged out" %}</title>
+<link rel="stylesheet" href="{% static "cemes/admin_htmx/css/admin.css" %}">
+</head>
+<body class="login-page">
+<main class="login-card">
+  <h1>{% trans "Logged out" %}</h1>
+  <p>{% trans "Thanks for spending some quality time with the web site today." %}</p>
+  <a class="button primary block" href="{% url "admin_htmx:login" %}">{% trans "Log in again" %}</a>
+</main>
+</body>
+</html>

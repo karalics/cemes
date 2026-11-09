@@ -1,0 +1,74 @@
+{% load i18n %}
+{% comment %}
+Inline formsets.
+
+Django's ``InlineAdminFormSet`` yields one ``InlineAdminForm`` per form
+and, when the user may add rows, finishes with the empty form whose
+prefix is ``__prefix__``. That last row is kept in the markup as the
+template a new row is cloned from, which is the same contract Django's
+own ``inlines.js`` relies on - so Cemes's ``extra``, ``max_num``
+and ``_order`` handling all carry over.
+{% endcomment %}
+{% for inline in inline_formsets %}
+  <fieldset class="inline-group"
+            data-inline-prefix="{{ inline.formset.prefix }}"
+            data-can-add="{{ inline.has_add_permission|yesno:"1,0" }}"
+            data-max-num="{{ inline.formset.max_num }}">
+    <legend>{{ inline.opts.verbose_name_plural|capfirst }}</legend>
+
+    {{ inline.formset.management_form }}
+    {% if inline.formset.non_form_errors %}
+      <div class="errornote">{{ inline.formset.non_form_errors }}</div>
+    {% endif %}
+
+    <div class="inline-rows" data-inline-rows>
+      {% for inline_form in inline %}
+        {% if forloop.last and inline.has_add_permission %}
+          {# The empty form - markup only, cloned by admin.js. #}
+          <div class="inline-row empty-form" data-inline-template hidden>
+        {% else %}
+          <div class="inline-row">
+        {% endif %}
+          <div class="inline-row-head">
+            <span class="inline-row-title">
+              {% if inline_form.original %}{{ inline_form.original }}
+              {% else %}{{ inline.opts.verbose_name|capfirst }}{% endif %}
+            </span>
+            <span class="inline-row-tools">
+              <button type="button" class="row-move" data-move="up"
+                      title="{% trans "Move up" %}" aria-label="{% trans "Move up" %}">&#9650;</button>
+              <button type="button" class="row-move" data-move="down"
+                      title="{% trans "Move down" %}" aria-label="{% trans "Move down" %}">&#9660;</button>
+              {% if inline.formset.can_delete %}
+                <button type="button" class="row-delete" data-row-delete
+                        title="{% trans "Remove" %}" aria-label="{% trans "Remove" %}">&times;</button>
+              {% endif %}
+            </span>
+          </div>
+
+          {% if inline_form.form.non_field_errors %}
+            <div class="errornote">{{ inline_form.form.non_field_errors }}</div>
+          {% endif %}
+
+          {% with admin_fieldsets=inline_form %}
+            {% include "admin_htmx/includes/fieldset.html" %}
+          {% endwith %}
+
+          <div class="inline-hidden">
+            {% if inline_form.needs_explicit_pk_field %}{{ inline_form.pk_field.field }}{% endif %}
+            {{ inline_form.fk_field.field }}
+            {% if inline.formset.can_delete %}
+              <span class="delete-flag">{{ inline_form.deletion_field.field }}</span>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if inline.has_add_permission %}
+      <button type="button" class="button add-row" data-add-row>
+        {% blocktrans with name=inline.opts.verbose_name %}Add another {{ name }}{% endblocktrans %}
+      </button>
+    {% endif %}
+  </fieldset>
+{% endfor %}

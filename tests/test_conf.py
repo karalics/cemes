@@ -4,10 +4,10 @@ from unittest import skipUnless
 from django.conf import settings as django_settings
 from django.utils.encoding import force_str
 
-from mezzanine.conf import register_setting, registry, settings
-from mezzanine.conf.context_processors import TemplateSettings
-from mezzanine.conf.models import Setting
-from mezzanine.utils.tests import TestCase
+from cemes.conf import register_setting, registry, settings
+from cemes.conf.context_processors import TemplateSettings
+from cemes.conf.models import Setting
+from cemes.utils.tests import TestCase
 
 
 class ConfTests(TestCase):
@@ -204,14 +204,14 @@ class ConfTests(TestCase):
         """
 
         # Ensure usage with no current request does not break caching
-        from mezzanine.core.request import _thread_local
+        from cemes.core.request import _thread_local
 
         try:
             del _thread_local.request
         except AttributeError:
             pass
 
-        setting = Setting.objects.create(name="SITE_TITLE", value="Mezzanine")
+        setting = Setting.objects.create(name="SITE_TITLE", value="Cemes")
         original_site_title = settings.SITE_TITLE
         setting.value = "Foobar"
         setting.save()

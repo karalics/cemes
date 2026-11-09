@@ -2,10 +2,10 @@ import os
 from shutil import rmtree
 from uuid import uuid4
 
-from mezzanine.conf import settings
-from mezzanine.core.templatetags.mezzanine_tags import thumbnail
-from mezzanine.galleries.models import GALLERIES_UPLOAD_DIR, Gallery
-from mezzanine.utils.tests import TestCase, copy_test_to_media
+from cemes.conf import settings
+from cemes.core.templatetags.cemes_tags import thumbnail
+from cemes.galleries.models import GALLERIES_UPLOAD_DIR, Gallery
+from cemes.utils.tests import TestCase, copy_test_to_media
 
 
 class GalleriesTests(TestCase):
@@ -15,7 +15,7 @@ class GalleriesTests(TestCase):
         import, and that descriptions are created.
         """
         zip_name = "gallery.zip"
-        copy_test_to_media("mezzanine.core", zip_name)
+        copy_test_to_media("cemes.core", zip_name)
         title = str(uuid4())
         gallery = Gallery.objects.create(title=title, zip_import=zip_name)
         images = list(gallery.images.all())
@@ -34,7 +34,7 @@ class GalleriesTests(TestCase):
             return
         image_name = "image.jpg"
         size = (24, 24)
-        copy_test_to_media("mezzanine.core", image_name)
+        copy_test_to_media("cemes.core", image_name)
         thumb_name = os.path.join(
             settings.THUMBNAILS_DIR_NAME,
             image_name,

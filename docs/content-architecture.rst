@@ -2,49 +2,49 @@
 Content Architecture
 ====================
 
-Content in Mezzanine primarily revolves around the models found in
-two packages, :mod:`mezzanine.core` and :mod:`mezzanine.pages`. Many of
+Content in Cemes primarily revolves around the models found in
+two packages, :mod:`cemes.core` and :mod:`cemes.pages`. Many of
 these models are abstract, and very small in scope, and are then
 combined together as the building blocks that form the models you'll
-actually be exposed to, such as :class:`mezzanine.core.models.Displayable`
-and :class:`mezzanine.pages.models.Page`, which are the two main models you
+actually be exposed to, such as :class:`cemes.core.models.Displayable`
+and :class:`cemes.pages.models.Page`, which are the two main models you
 will inherit from when building your own models for content types.
 
 Before we look at :class:`.Displayable` and :class:`.Page`, here's a quick
 list of all the abstract models used to build them:
 
-  * :class:`mezzanine.core.models.SiteRelated` - Contains a related
+  * :class:`cemes.core.models.SiteRelated` - Contains a related
     ``django.contrib.sites.models.Site`` field.
-  * :class:`mezzanine.core.models.Slugged` - Implements a title and URL
+  * :class:`cemes.core.models.Slugged` - Implements a title and URL
     (slug).
-  * :class:`mezzanine.core.models.MetaData` - Provides SEO meta data, such
+  * :class:`cemes.core.models.MetaData` - Provides SEO meta data, such
     as title, description and keywords.
-  * :class:`mezzanine.core.models.TimeStamped` - Provides created and
+  * :class:`cemes.core.models.TimeStamped` - Provides created and
     updated timestamps.
-  * :class:`mezzanine.core.models.Displayable` - Combines all the models
+  * :class:`cemes.core.models.Displayable` - Combines all the models
     above, then implements publishing features, such as status and
     dates.
-  * :class:`mezzanine.core.models.Ownable` - Contains a related user field,
+  * :class:`cemes.core.models.Ownable` - Contains a related user field,
     suitable for content owned by specific authors.
-  * :class:`mezzanine.core.models.RichText` - Provides a WYSIWYG editable
+  * :class:`cemes.core.models.RichText` - Provides a WYSIWYG editable
     field.
-  * :class:`mezzanine.core.models.Orderable` - Used to implement drag/drop
+  * :class:`cemes.core.models.Orderable` - Used to implement drag/drop
     ordering of content, whether out of the box as Django admin
-    inlines, or custom such as Mezzanine's page tree.
+    inlines, or custom such as Cemes's page tree.
 
 And for completeness, here are the primary content types provided
 out of the box to end users, that make use of :class:`.Displayable` and
 :class:`.Page`:
 
-  * :class:`mezzanine.blog.models.BlogPost` - Blog posts that subclass
+  * :class:`cemes.blog.models.BlogPost` - Blog posts that subclass
     :class:`.Displayable` as they're not part of the site's navigation.
-  * :class:`mezzanine.pages.models.RichTextPage` - Default :class:`.Page`
+  * :class:`cemes.pages.models.RichTextPage` - Default :class:`.Page`
     subclass, providing a WYSIWYG editable field.
-  * :class:`mezzanine.pages.models.Link` - :class:`.Page` subclass for links
+  * :class:`cemes.pages.models.Link` - :class:`.Page` subclass for links
     pointing to other URLs.
-  * :class:`mezzanine.forms.models.Form` - :class:`.Page` subclass for building
+  * :class:`cemes.forms.models.Form` - :class:`.Page` subclass for building
     forms.
-  * :class:`mezzanine.galleries.models.Gallery` - :class:`.Page` subclass for
+  * :class:`cemes.galleries.models.Gallery` - :class:`.Page` subclass for
     building image gallery pages.
 
 These certainly serve as examples for implementing your own types of
@@ -61,7 +61,7 @@ It also provides the core features of content such as:
   * Auto-generated slug from the title.
   * Draft/published status with the ability to preview drafts.
   * Pre-dated publishing.
-  * Searchable by Mezzanine's :doc:`search-engine`.
+  * Searchable by Cemes's :doc:`search-engine`.
 
 Subclassing :class:`.Displayable` best suits low-level content that doesn't
 form part of the site's navigation - such as blog posts, or events in a
@@ -70,7 +70,7 @@ the :class:`.Displayable` model - it simply provides a common set of features
 useful to content.
 
 In contrast, the concrete :class:`.Page` model forms the primary API for
-building a Mezzanine site. It extends :class:`.Displayable`, and implements a
+building a Cemes site. It extends :class:`.Displayable`, and implements a
 hierarchical navigation tree. The rest of this section of the
 documentation will focus on the :class:`.Page` model, and the way it is
 used to build all the types of content a site will have available.
@@ -78,13 +78,13 @@ used to build all the types of content a site will have available.
 The :class:`.Page` Model
 ========================
 
-The foundation of a Mezzanine site is the model
-:class:`mezzanine.pages.models.Page`. Each :class:`.Page` instance is stored
+The foundation of a Cemes site is the model
+:class:`cemes.pages.models.Page`. Each :class:`.Page` instance is stored
 in a hierarchical tree to form the site's navigation, and an interface for
 managing the structure of the navigation tree is provided in the admin
-via :class:`mezzanine.pages.admin.PageAdmin`. All types of content inherit
-from the :class:`.Page` model and Mezzanine provides a default content type
-via the :class:`mezzanine.pages.models.RichTextPage` model which simply
+via :class:`cemes.pages.admin.PageAdmin`. All types of content inherit
+from the :class:`.Page` model and Cemes provides a default content type
+via the :class:`cemes.pages.models.RichTextPage` model which simply
 contains a WYSIWYG editable field for managing HTML content.
 
 .. _creating-custom-content-types:
@@ -98,7 +98,7 @@ simply create your own models that inherit from :class:`.Page`. For example
 if we wanted to have pages that were authors with books::
 
     from django.db import models
-    from mezzanine.pages.models import Page
+    from cemes.pages.models import Page
 
     # The members of Page will be inherited by the Author model, such
     # as title, slug, etc. For authors we can use the title field to
@@ -116,11 +116,11 @@ if we wanted to have pages that were authors with books::
 Next you'll need to register your model with Django's admin to make it
 available as a content type. If your content type only exposes some new
 fields that you'd like to make editable in the admin, you can simply
-register your model using the :class:`mezzanine.pages.admin.PageAdmin`
+register your model using the :class:`cemes.pages.admin.PageAdmin`
 class::
 
     from django.contrib import admin
-    from mezzanine.pages.admin import PageAdmin
+    from cemes.pages.admin import PageAdmin
     from .models import Author
 
     admin.site.register(Author, PageAdmin)
@@ -139,7 +139,7 @@ lose the fields that the :class:`.Page` model implements::
 
     from copy import deepcopy
     from django.contrib import admin
-    from mezzanine.pages.admin import PageAdmin
+    from cemes.pages.admin import PageAdmin
     from .models import Author, Book
 
     author_extra_fieldsets = ((None, {"fields": ("dob",)}),)
@@ -167,7 +167,7 @@ the navigation tree.
     to implement a WYSIWYG editable field in the way the
     :class:`.RichTextPage` model does, you can simply subclass both
     :class:`.Page` and :class:`.RichText`, the latter being imported from
-    :class:`mezzanine.core.models`.
+    :class:`cemes.core.models`.
 
 Displaying Custom Content Types
 ===============================
@@ -201,7 +201,7 @@ for retrieving the custom instance without knowing its type::
 Page Templates
 ==============
 
-The view function :func:`mezzanine.pages.views.page` handles returning a
+The view function :func:`cemes.pages.views.page` handles returning a
 :class:`.Page` instance to a template. By default the template
 ``pages/page.html`` is used, but if a custom template exists it will be
 used instead. The check for a custom template will first check for a
@@ -231,22 +231,22 @@ but what if we want to extend them further with more advanced features?
 For example adding a form to the page and handling when a user submits
 the form. This type of logic would typically go into a view function,
 but since every :class:`.Page` instance is handled via the view function
-:func:`mezzanine.pages.views.page` we can't create our own views for pages.
-Mezzanine solves this problem using *Page Processors*.
+:func:`cemes.pages.views.page` we can't create our own views for pages.
+Cemes solves this problem using *Page Processors*.
 
 *Page Processors* are simply functions that can be associated to any
 custom :class:`.Page` models and are then called inside the
-:func:`mezzanine.pages.views.page` view when viewing the associated
+:func:`cemes.pages.views.page` view when viewing the associated
 :class:`.Page` instance. A Page Processor will always be passed two arguments
 - the request and the :class:`.Page` instance, and can either return a
 dictionary that will be added to the template context, or it can return
 any of Django's :class:`~django.http.HttpResponse` classes which will override the
-:func:`mezzanine.pages.views.page` view entirely.
+:func:`cemes.pages.views.page` view entirely.
 
 To associate a Page Processor to a custom :class:`.Page` model you must
 create the function for it in a module called :mod:`.page_processors.py`
 inside one of your :django:setting:`INSTALLED_APPS` and decorate it using the
-decorator :func:`mezzanine.pages.page_processors.processor_for`.
+decorator :func:`cemes.pages.page_processors.processor_for`.
 
 Continuing on from our author example, suppose we want to add an
 enquiry form to each author page. Our :mod:`page_processors.py` module in
@@ -254,7 +254,7 @@ the author app would be as follows::
 
     from django import forms
     from django.http import HttpResponseRedirect
-    from mezzanine.pages.page_processors import processor_for
+    from cemes.pages.page_processors import processor_for
     from .models import Author
 
     class AuthorForm(forms.Form):
@@ -329,7 +329,7 @@ child page at most, can only be deleted when added as a child page
 (unless you're a superuser), and cannot be moved to a top-level
 position, the following permission methods could be implemented::
 
-    from mezzanine.pages.models import Page, PageMoveException
+    from cemes.pages.models import Page, PageMoveException
 
     class Author(Page):
         dob = models.DateField("Date of birth")
@@ -356,7 +356,7 @@ drop-down lists. Another type of menu would be a full or partial tree in
 a side-bar on the site. The footer may display a menu with primary and
 secondary pages grouped together as vertical lists.
 
-Mezzanine provides the :func:`.page_menu`
+Cemes provides the :func:`.page_menu`
 template tag for rendering the above types of page menus, or any other
 type you can think of. The :func:`.page_menu` template tag is responsible
 for rendering a single branch of the page tree at a time, and accepts
@@ -525,20 +525,20 @@ Integrating Third-party Apps with Pages
 =======================================
 
 Sometimes you might need to use regular Django applications within your
-site, that fall outside of Mezzanine's page structure. Of course this is
-fine since Mezzanine is just Django - you can simply add the app's
+site, that fall outside of Cemes's page structure. Of course this is
+fine since Cemes is just Django - you can simply add the app's
 urlpatterns to your project's ``urls.py`` module like a regular Django
 project.
 
-A common requirement however is for pages in Mezzanine's navigation to
+A common requirement however is for pages in Cemes's navigation to
 point to the urlpatterns for these regular Django apps. Implementing
 this simply requires creating a page in the admin, with a URL matching
 a pattern used by the application. With that in place, the template
 rendered by the application's view will have a ``page`` variable in
 its context, that contains the current page object that was created
-with the same URL. This allows Mezzanine to mark the ``page`` instance
+with the same URL. This allows Cemes to mark the ``page`` instance
 as active in the navigation, and to generate breadcrumbs for the
 ``page`` instance as well.
 
-An example of this setup is Mezzanine's blog application, which does not
+An example of this setup is Cemes's blog application, which does not
 use :class:`.Page` content types, and is just a regular Django app.

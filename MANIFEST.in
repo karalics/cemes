@@ -1,7 +1,7 @@
 include AUTHORS CHANGELOG LICENSE *.rst
 recursive-include docs *
 recursive-exclude docs/build *
-recursive-include mezzanine *
+recursive-include cemes *
 recursive-exclude */project_template/static *
 
 global-exclude __pycache__

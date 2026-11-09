@@ -42,7 +42,7 @@ body:
         - Python version:
         - Django version:
         - Database engine and version:
-        - Mezzanine version:
+        - Cemes version:
     render: markdown
   validations:
     required: true

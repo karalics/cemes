@@ -8,18 +8,18 @@ The easiest method is to install directly from pypi using `pip`_ by
 running the command below, which will also install the required
 dependencies mentioned above::
 
-    $ pip install mezzanine
+    $ pip install cemes
 
-If you prefer, you can download Mezzanine and install it directly from
+If you prefer, you can download Cemes and install it directly from
 source::
 
     $ python setup.py install
 
-Once installed, the command ``mezzanine-project`` can be used to
-create a new Mezzanine project in similar fashion to
+Once installed, the command ``cemes-project`` can be used to
+create a new Cemes project in similar fashion to
 ``django-admin.py``::
 
-    $ mezzanine-project project_name
+    $ cemes-project project_name
     $ cd project_name
     $ python manage.py createdb --noinput
     $ python manage.py runserver
@@ -37,10 +37,10 @@ default``). If you'd like to specify a different username and password
 during set up, simply exclude the ``--noinput`` option included above
 when running ``createdb``.
 
-For information on how to add Mezzanine to an existing Django project,
+For information on how to add Cemes to an existing Django project,
 see the FAQ section of the documentation.
 
-Mezzanine makes use of as few libraries as possible (apart from a
+Cemes makes use of as few libraries as possible (apart from a
 standard Django environment), with the following dependencies, which
 unless noted as optional, should be installed automatically following
 the above instructions:
@@ -71,7 +71,7 @@ A handful of attractive `Free Themes`_ are available thanks to
 Browser Support
 ===============
 
-Mezzanine's admin interface works with all modern browsers including Google
+Cemes's admin interface works with all modern browsers including Google
 Chrome, Safari, Firefox and MS Edge. Internet Explorer and Edge < 79 are
 generally unsupported.
 
@@ -79,119 +79,119 @@ generally unsupported.
 Third-Party Plug-Ins
 ====================
 
-The following plug-ins have been developed outside of Mezzanine. If you
-have developed a plug-in to integrate with Mezzanine and would like to
+The following plug-ins have been developed outside of Cemes. If you
+have developed a plug-in to integrate with Cemes and would like to
 list it here, send an email to the `mezzanine-users`_ mailing list, or
 better yet, fork the project and create a pull request with your
 plug-in added to the list below. We also ask that you add it to the
-`Mezzanine Grid on djangopackages.com`_.
+`Cemes Grid on djangopackages.com`_.
 
-* `Cartridge`_ - ecommerce for Mezzanine.
-* `Drum`_ - A `Hacker News`_ / `Reddit`_ clone powered by Mezzanine.
-* `mezzanine-html5boilerplate`_ - Integrates the
-  `html5boilerplate project`_  into Mezzanine.
-* `mezzanine-mdown`_ - Adds `Markdown`_ support to Mezzanine's rich
+* `Cartridge`_ - ecommerce for Cemes.
+* `Drum`_ - A `Hacker News`_ / `Reddit`_ clone powered by Cemes.
+* `cemes-html5boilerplate`_ - Integrates the
+  `html5boilerplate project`_  into Cemes.
+* `cemes-mdown`_ - Adds `Markdown`_ support to Cemes's rich
   text editor.
-* `mezzanine-openshift`_ - Setup for running Mezzanine on
+* `cemes-openshift`_ - Setup for running Cemes on
   `Redhat's OpenShift`_ cloud platform.
-* `mezzanine-stackato`_ - Setup for running Mezzanine on
+* `cemes-stackato`_ - Setup for running Cemes on
   `ActiveState's Stackato`_ cloud platform.
-* `mezzanine-blocks`_ - A Mezzanine flavored fork of
+* `cemes-blocks`_ - A Cemes flavored fork of
   django-flatblocks.
-* `mezzanine-widgets`_ - Widget system for Mezzanine.
-* `mezzanine-themes`_ - A collection of Django/Mezzanine templates.
-* `mezzanine-twittertopic`_ - Manage multiple Twitter topic feeds
-  from the Mezzanine admin interface.
-* `mezzanine-captcha`_ - Adds CAPTCHA field types to Mezzanine's
+* `cemes-widgets`_ - Widget system for Cemes.
+* `cemes-themes`_ - A collection of Django/Cemes templates.
+* `cemes-twittertopic`_ - Manage multiple Twitter topic feeds
+  from the Cemes admin interface.
+* `cemes-captcha`_ - Adds CAPTCHA field types to Cemes's
   forms builder app.
-* `mezzanine-bookmarks`_ - A multi-user bookmark app for Mezzanine.
-* `mezzanine-events`_ - Events plugin for Mezzanine, with geocoding
+* `cemes-bookmarks`_ - A multi-user bookmark app for Cemes.
+* `cemes-events`_ - Events plugin for Cemes, with geocoding
   via Google Maps, iCalendar files, webcal URLs and directions via
   Google Calendar/Maps.
-* `mezzanine-polls`_ - Polls application for Mezzanine.
-* `mezzanine-pagedown`_ - Adds the `Pagedown`_ WYSIWYG editor to
-  Mezzanine.
-* `mezzanine-careers`_ - Job posting application for Mezzanine.
-* `mezzanine-recipes`_ - Recipes plugin with built-in REST API.
-* `mezzanine-slides`_ - Responsive banner slides app for Mezzanine.
-* `mezzyblocks`_ - Another app for adding blocks/modules to Mezzanine.
-* `mezzanine-flexipage`_ - Allows designers to manage content areas
+* `cemes-polls`_ - Polls application for Cemes.
+* `cemes-pagedown`_ - Adds the `Pagedown`_ WYSIWYG editor to
+  Cemes.
+* `cemes-careers`_ - Job posting application for Cemes.
+* `cemes-recipes`_ - Recipes plugin with built-in REST API.
+* `cemes-slides`_ - Responsive banner slides app for Cemes.
+* `mezzyblocks`_ - Another app for adding blocks/modules to Cemes.
+* `cemes-flexipage`_ - Allows designers to manage content areas
   in templates.
-* `mezzanine-instagram`_ - A simple Instagram app for Mezzanine.
-* `mezzanine-wiki`_ - Wiki app for Mezzanine.
-* `mezzanine-calendar`_ - Calendar pages in Mezzanine
-* `mezzanine-facebook`_ - Simple Facebook integration for Mezzanine.
-* `mezzanine-instagram-gallery`_ - Create Mezzanine galleries using
+* `cemes-instagram`_ - A simple Instagram app for Cemes.
+* `cemes-wiki`_ - Wiki app for Cemes.
+* `cemes-calendar`_ - Calendar pages in Cemes
+* `cemes-facebook`_ - Simple Facebook integration for Cemes.
+* `cemes-instagram-gallery`_ - Create Cemes galleries using
   Instagram images.
-* `mezzanine-cli`_ - Command-line interface for Mezzanine.
-* `mezzanine-categorylink`_ - Integrates Mezzanine's Link pages with
+* `cemes-cli`_ - Command-line interface for Cemes.
+* `cemes-categorylink`_ - Integrates Cemes's Link pages with
   its blog categories.
-* `mezzanine-podcast`_ - A simple podcast streamer and manager for
-  Mezzanine.
-* `mezzanine-linkcollection`_ - Collect links. Feature them. Share
+* `cemes-podcast`_ - A simple podcast streamer and manager for
+  Cemes.
+* `cemes-linkcollection`_ - Collect links. Feature them. Share
   them over RSS.
-* `cash-generator`_ - Generate `GnuCash`_ invoices with Mezzanine.
-* `mezzanine-foundation`_ - `Zurb Foundation`_ theme for Mezzanine.
-* `mezzanine-file-collections`_ - Simple file collection page type
-  for Mezzanine.
-* `mezzanine-wymeditor`_ - `WYMeditor`_ adapted as the rich text
-  editor for Mezzanine.
-* `mezzanine-meze`_ - Adds support for `reStructuredText`_,
-  `Pygments`_ and more, to Mezzanine's rich text editing.
-* `mezzanine-pageimages`_ - Add background and banner images per page
-  in Mezzanine.
-* `mezzanine-protected-pages`_ - Restrict access to pages by group
+* `cash-generator`_ - Generate `GnuCash`_ invoices with Cemes.
+* `cemes-foundation`_ - `Zurb Foundation`_ theme for Cemes.
+* `cemes-file-collections`_ - Simple file collection page type
+  for Cemes.
+* `cemes-wymeditor`_ - `WYMeditor`_ adapted as the rich text
+  editor for Cemes.
+* `cemes-meze`_ - Adds support for `reStructuredText`_,
+  `Pygments`_ and more, to Cemes's rich text editing.
+* `cemes-pageimages`_ - Add background and banner images per page
+  in Cemes.
+* `cemes-protected-pages`_ - Restrict access to pages by group
   membership.
-* `mezzanine-page-auth`_ - A Mezzanine module for add group-level
+* `cemes-page-auth`_ - A Cemes module for add group-level
   permission to pages.
 * `django-widgy`_ - Widget-oriented content editing. Includes an
-  adapter for Mezzanine and a powerful form builder.
-* `mezzanine-admin-backup`_ - Export your Mezzanine database and assets
+  adapter for Cemes and a powerful form builder.
+* `cemes-admin-backup`_ - Export your Cemes database and assets
   directly from the admin.
-* `mezzanine-mailchimp`_ - Integrate Mezzanine forms with a MailChimp
+* `cemes-mailchimp`_ - Integrate Cemes forms with a MailChimp
   subscription list.
-* `mezzanine-grappelli`_ - Integrates latest upstream
-  grappelli/filebrowser with Mezzanine.
-* `mezzanine-workout`_ - Store and display FIT data in Mezzanine.
-* `mezzanine-agenda`_ - Event functionality for your Mezzanine sites.
-* `mezzanine-dpaste`_ - Integrate `dpaste`_, a Django pastebin, into
-  your Mezzanine site.
-* `mezzanine-linkdump`_ - Create, display and track links in Mezzanine.
-* `mezzanine-people`_ - Categorize and list people in Mezzanine.
-* `mezzanine-webf`_ - Fabfile for deploying Mezzanine to Webfaction.
-* `mezzanineopenshift`_ Another setup for `Redhat's OpenShift`_ cloud
+* `cemes-grappelli`_ - Integrates latest upstream
+  grappelli/filebrowser with Cemes.
+* `cemes-workout`_ - Store and display FIT data in Cemes.
+* `cemes-agenda`_ - Event functionality for your Cemes sites.
+* `cemes-dpaste`_ - Integrate `dpaste`_, a Django pastebin, into
+  your Cemes site.
+* `cemes-linkdump`_ - Create, display and track links in Cemes.
+* `cemes-people`_ - Categorize and list people in Cemes.
+* `cemes-webf`_ - Fabfile for deploying Cemes to Webfaction.
+* `cemesopenshift`_ Another setup for `Redhat's OpenShift`_ cloud
   platform.
-* `mezzanine-bsbanners`_ - Add `Twitter Bootstrap`_ Carousels and
-  Jumbotrons to Mezzanine.
-* `mezzanine-business-theme`_ - Starter business theme for Mezzanine.
-* `open-helpdesk`_ - A helpdesk app built with Mezzanine.
-* `mezzanine-invites`_ - Allow site registration via alphanumeric
+* `cemes-bsbanners`_ - Add `Twitter Bootstrap`_ Carousels and
+  Jumbotrons to Cemes.
+* `cemes-business-theme`_ - Starter business theme for Cemes.
+* `open-helpdesk`_ - A helpdesk app built with Cemes.
+* `cemes-invites`_ - Allow site registration via alphanumeric
   invite codes.
-* `ansible-mezzanine`_ - Full pipeline (dev, staging, production)
-  deployment of Mezzanine using `Ansible`_.
-* `mezzanine-modal-announcements`_ - Popup announcements for Mezzanine
+* `ansible-cemes`_ - Full pipeline (dev, staging, production)
+  deployment of Cemes using `Ansible`_.
+* `cemes-modal-announcements`_ - Popup announcements for Cemes
   websites via Bootstrap modals.
-* `mezzanine-buffer`_ - `Buffer`_ integration for Mezzanine.
-* `mezzanine-slideshows`_ - Allows placement of Mezzanine galleries
-  within other Mezzanine pages as slideshows.
-* `mezzanine-onepage`_ - Design helper for single-page Mezzanine sites.
-* `mezzanine-api`_ - RESTful web API for Mezzanine.
-* `mezzanine-smartling`_ - Integrates Mezzanine content with
+* `cemes-buffer`_ - `Buffer`_ integration for Cemes.
+* `cemes-slideshows`_ - Allows placement of Cemes galleries
+  within other Cemes pages as slideshows.
+* `cemes-onepage`_ - Design helper for single-page Cemes sites.
+* `cemes-api`_ - RESTful web API for Cemes.
+* `cemes-smartling`_ - Integrates Cemes content with
   `Smartling Translations`_.
-* `mezzanine-shortcodes`_ - `Wordpress shortcodes`_ for Mezzanine.
+* `cemes-shortcodes`_ - `Wordpress shortcodes`_ for Cemes.
 
 
-Sites Using Mezzanine
+Sites Using Cemes
 =====================
 
-Got a site built with Mezzanine? You can add it to the gallery on
-the `Mezzanine project page`_ by adding it to the list below - just
+Got a site built with Cemes? You can add it to the gallery on
+the `Cemes project page`_ by adding it to the list below - just
 fork the project and create a pull request. Please omit the trailing
 slash in the URL, as we manually add that ourselves to feature
 certain sites.
 
 * `Citrus Agency <http://citrus.com.au/>`_
-* `Mezzanine Project <http://mezzanine.jupo.org>`_
+* `Cemes Project <http://mezzanine.jupo.org>`_
 * `Nick Hagianis <http://hagianis.com>`_
 * `Thomas Johnson <http://tomfmason.net>`_
 * `Central Mosque Wembley <http://wembley-mosque.co.uk>`_
@@ -462,81 +462,81 @@ certain sites.
 
 .. _`@abhinavsohani`: https://twitter.com/abhinavsohani
 .. _`@joshcartme`: https://twitter.com/joshcartme
-.. _`Mezzanine Grid on djangopackages.com`: http://www.djangopackages.com/grids/g/mezzanine/
+.. _`Cemes Grid on djangopackages.com`: http://www.djangopackages.com/grids/g/mezzanine/
 .. _`Cartridge`: http://cartridge.jupo.org/
 .. _`Drum`: https://github.com/stephenmcd/drum
 .. _`Hacker News`: https://news.ycombinator.com
 .. _`Reddit`: http://www.reddit.com
-.. _`mezzanine-html5boilerplate`: https://github.com/tvon/mezzanine-html5boilerplate
+.. _`cemes-html5boilerplate`: https://github.com/tvon/mezzanine-html5boilerplate
 .. _`html5boilerplate project`: http://html5boilerplate.com/
-.. _`mezzanine-mdown`: https://bitbucket.org/onelson/mezzanine-mdown
+.. _`cemes-mdown`: https://bitbucket.org/onelson/mezzanine-mdown
 .. _`Markdown`: http://en.wikipedia.org/wiki/Markdown
-.. _`mezzanine-openshift`: https://github.com/overshard/mezzanine-openshift
+.. _`cemes-openshift`: https://github.com/overshard/mezzanine-openshift
 .. _`Redhat's OpenShift`: https://openshift.redhat.com/
 .. _`Ansible`: http://www.ansible.com/
-.. _`mezzanine-stackato`: https://github.com/Stackato-Apps/mezzanine
+.. _`cemes-stackato`: https://github.com/Stackato-Apps/mezzanine
 .. _`ActiveState's Stackato`: http://www.activestate.com/stackato
-.. _`mezzanine-blocks`: https://github.com/renyi/mezzanine-blocks
-.. _`mezzanine-widgets`: https://github.com/osiloke/mezzanine_widgets
-.. _`mezzanine-themes`: https://github.com/renyi/mezzanine-themes
-.. _`mezzanine-twittertopic`: https://github.com/lockhart/mezzanine-twittertopic
-.. _`mezzanine-captcha`: https://github.com/mjtorn/mezzanine-captcha
-.. _`mezzanine-bookmarks`: https://github.com/adieu/mezzanine-bookmarks
-.. _`mezzanine-events`: https://github.com/stbarnabas/mezzanine-events
-.. _`mezzanine-polls`: https://github.com/sebasmagri/mezzanine_polls
-.. _`mezzanine-pagedown`: https://bitbucket.org/akhayyat/mezzanine-pagedown
+.. _`cemes-blocks`: https://github.com/renyi/mezzanine-blocks
+.. _`cemes-widgets`: https://github.com/osiloke/mezzanine_widgets
+.. _`cemes-themes`: https://github.com/renyi/mezzanine-themes
+.. _`cemes-twittertopic`: https://github.com/lockhart/mezzanine-twittertopic
+.. _`cemes-captcha`: https://github.com/mjtorn/mezzanine-captcha
+.. _`cemes-bookmarks`: https://github.com/adieu/mezzanine-bookmarks
+.. _`cemes-events`: https://github.com/stbarnabas/mezzanine-events
+.. _`cemes-polls`: https://github.com/sebasmagri/mezzanine_polls
+.. _`cemes-pagedown`: https://bitbucket.org/akhayyat/mezzanine-pagedown
 .. _`PageDown`: https://code.google.com/p/pagedown/
-.. _`mezzanine-careers`: https://github.com/mogga/mezzanine-careers
-.. _`mezzanine-recipes`: https://github.com/tjetzinger/mezzanine-recipes
-.. _`mezzanine-slides`: https://github.com/overshard/mezzanine-slides
+.. _`cemes-careers`: https://github.com/mogga/mezzanine-careers
+.. _`cemes-recipes`: https://github.com/tjetzinger/mezzanine-recipes
+.. _`cemes-slides`: https://github.com/overshard/mezzanine-slides
 .. _`mezzyblocks`: https://github.com/jardaroh/mezzyblocks
-.. _`mezzanine-flexipage`: https://github.com/mrmagooey/mezzanine-flexipage
-.. _`mezzanine-wiki`: https://github.com/dfalk/mezzanine-wiki
-.. _`mezzanine-instagram`: https://github.com/shurik/Mezzanine_Instagram
-.. _`mezzanine-calendar`: https://github.com/shurik/mezzanine.calendar
-.. _`mezzanine-facebook`: https://github.com/shurik/Mezzanine_Facebook
-.. _`mezzanine-instagram-gallery`: https://github.com/georgeyk/mezzanine-instagram-gallery
-.. _`mezzanine-cli`: https://github.com/adieu/mezzanine-cli
-.. _`mezzanine-categorylink`: https://github.com/mjtorn/mezzanine-categorylink
-.. _`mezzanine-podcast`: https://github.com/carpie/mezzanine-podcast
-.. _`mezzanine-linkcollection`: https://github.com/mjtorn/mezzanine-linkcollection
+.. _`cemes-flexipage`: https://github.com/mrmagooey/mezzanine-flexipage
+.. _`cemes-wiki`: https://github.com/dfalk/mezzanine-wiki
+.. _`cemes-instagram`: https://github.com/shurik/Mezzanine_Instagram
+.. _`cemes-calendar`: https://github.com/shurik/mezzanine.calendar
+.. _`cemes-facebook`: https://github.com/shurik/Mezzanine_Facebook
+.. _`cemes-instagram-gallery`: https://github.com/georgeyk/mezzanine-instagram-gallery
+.. _`cemes-cli`: https://github.com/adieu/mezzanine-cli
+.. _`cemes-categorylink`: https://github.com/mjtorn/mezzanine-categorylink
+.. _`cemes-podcast`: https://github.com/carpie/mezzanine-podcast
+.. _`cemes-linkcollection`: https://github.com/mjtorn/mezzanine-linkcollection
 .. _`cash-generator`: https://github.com/ambientsound/cash-generator
 .. _`GnuCash`: http://www.gnucash.org/
-.. _`mezzanine-foundation`: https://github.com/zgohr/mezzanine-foundation
+.. _`cemes-foundation`: https://github.com/zgohr/mezzanine-foundation
 .. _`Zurb Foundation`: http://foundation.zurb.com/
-.. _`mezzanine-file-collections`: https://github.com/thibault/mezzanine-file-collections
-.. _`mezzanine-wymeditor`: https://github.com/excieve/mezzanine-wymeditor
+.. _`cemes-file-collections`: https://github.com/thibault/mezzanine-file-collections
+.. _`cemes-wymeditor`: https://github.com/excieve/mezzanine-wymeditor
 .. _`WYMeditor`: http://wymeditor.github.io/wymeditor/
-.. _`mezzanine-meze`: https://github.com/abakan/mezzanine-meze
+.. _`cemes-meze`: https://github.com/abakan/mezzanine-meze
 .. _`reStructuredText`: http://docutils.sourceforge.net/rst.html
 .. _`Pygments`: http://pygments.org/
-.. _`mezzanine-pageimages`: https://github.com/bcs-de/mezzanine-pageimages
-.. _`mezzanine-protected-pages`: https://github.com/evilchili/mezzanine-protected-pages
-.. _`mezzanine-page-auth`: https://github.com/simodalla/mezzanine_page_auth
+.. _`cemes-pageimages`: https://github.com/bcs-de/mezzanine-pageimages
+.. _`cemes-protected-pages`: https://github.com/evilchili/mezzanine-protected-pages
+.. _`cemes-page-auth`: https://github.com/simodalla/mezzanine_page_auth
 .. _`django-widgy`: http://django-widgy.readthedocs.org/en/latest/
-.. _`mezzanine-admin-backup`: https://bitbucket.org/joshcartme/mezzanine-admin-backup
-.. _`mezzanine-mailchimp`: https://bitbucket.org/naritas/mezzanine-mailchimp
-.. _`mezzanine-grappelli`: https://github.com/sephii/mezzanine-grappelli
-.. _`mezzanine-workout`: https://github.com/kampfschlaefer/mezzanine-workout
-.. _`mezzanine-agenda`: https://github.com/jpells/mezzanine-agenda
-.. _`mezzanine-dpaste`: https://github.com/prikhi/mezzanine-dpaste
-.. _`mezzanine-linkdump`: https://github.com/prikhi/mezzanine-linkdump
-.. _`mezzanine-people`: https://github.com/eci/mezzanine-people
-.. _`mezzanine-webf`: https://github.com/jerivas/mezzanine-webf
-.. _`mezzanineopenshift`: https://bitbucket.org/radeksvarz/mezzanineopenshift
-.. _`mezzanine-bsbanners`: https://pypi.python.org/pypi/mezzanine-bsbanners
-.. _`mezzanine-business-theme`: https://github.com/dfalk/mezzanine-business-theme
+.. _`cemes-admin-backup`: https://bitbucket.org/joshcartme/mezzanine-admin-backup
+.. _`cemes-mailchimp`: https://bitbucket.org/naritas/mezzanine-mailchimp
+.. _`cemes-grappelli`: https://github.com/sephii/mezzanine-grappelli
+.. _`cemes-workout`: https://github.com/kampfschlaefer/mezzanine-workout
+.. _`cemes-agenda`: https://github.com/jpells/mezzanine-agenda
+.. _`cemes-dpaste`: https://github.com/prikhi/mezzanine-dpaste
+.. _`cemes-linkdump`: https://github.com/prikhi/mezzanine-linkdump
+.. _`cemes-people`: https://github.com/eci/mezzanine-people
+.. _`cemes-webf`: https://github.com/jerivas/mezzanine-webf
+.. _`cemesopenshift`: https://bitbucket.org/radeksvarz/mezzanineopenshift
+.. _`cemes-bsbanners`: https://pypi.python.org/pypi/mezzanine-bsbanners
+.. _`cemes-business-theme`: https://github.com/dfalk/mezzanine-business-theme
 .. _`open-helpdesk`: https://github.com/simodalla/open-helpdesk
-.. _`mezzanine-invites`: https://github.com/averagehuman/mezzanine-invites
-.. _`ansible-mezzanine`: https://github.com/keithadavidson/ansible-mezzanine
-.. _`mezzanine-modal-announcements`: https://github.com/joshcartme/mezzanine-modal-announcements
-.. _`mezzanine-buffer`: https://github.com/caffodian/mezzanine-buffer
+.. _`cemes-invites`: https://github.com/averagehuman/mezzanine-invites
+.. _`ansible-cemes`: https://github.com/keithadavidson/ansible-mezzanine
+.. _`cemes-modal-announcements`: https://github.com/joshcartme/mezzanine-modal-announcements
+.. _`cemes-buffer`: https://github.com/caffodian/mezzanine-buffer
 .. _`Buffer`: http://buffer.com
-.. _`mezzanine-slideshows`: https://github.com/philipsouthwell/mezzanine-slideshows
-.. _`mezzanine-onepage`: https://github.com/lucmilland/mezzanine-onepage
-.. _`mezzanine-api`: https://github.com/gcushen/mezzanine-api
-.. _`mezzanine-smartling`: https://github.com/Appdynamics/mezzanine-smartling
-.. _`mezzanine-shortcodes`: https://github.com/ryneeverett/mezzanine-shortcodes
+.. _`cemes-slideshows`: https://github.com/philipsouthwell/mezzanine-slideshows
+.. _`cemes-onepage`: https://github.com/lucmilland/mezzanine-onepage
+.. _`cemes-api`: https://github.com/gcushen/mezzanine-api
+.. _`cemes-smartling`: https://github.com/Appdynamics/mezzanine-smartling
+.. _`cemes-shortcodes`: https://github.com/ryneeverett/mezzanine-shortcodes
 
 .. _`Wordpress shortcodes`: https://codex.wordpress.org/Shortcode
 .. _`Smartling Translations`: http://www.smartling.com/

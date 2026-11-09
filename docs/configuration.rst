@@ -2,9 +2,9 @@
 Configuration
 =============
 
-Mezzanine provides a central system for defining settings within
+Cemes provides a central system for defining settings within
 your project and applications that can then be edited by admin users.
-The package :mod:`mezzanine.conf` contains the models for storing
+The package :mod:`cemes.conf` contains the models for storing
 editable settings in the database as well as the functions for
 registering and loading these settings throughout your project.
 
@@ -16,7 +16,7 @@ Registering Settings
 Settings are defined by creating a module named ``defaults.py`` inside
 one or more of the applications defined in your project's
 :django:setting:`INSTALLED_APPS` setting. Inside your ``defaults.py`` module
-you then call the function :func:`mezzanine.conf.register_setting` for
+you then call the function :func:`cemes.conf.register_setting` for
 each setting you want to define which takes several keyword arguments:
 
   * ``name``: The name of the setting.
@@ -41,7 +41,7 @@ For example suppose we had a ``authors`` application and we wanted to
 create a setting that controls the number of books displayed per author
 page, we would define the following in ``authors.defaults``::
 
-    from mezzanine.conf import register_setting
+    from cemes.conf import register_setting
 
     register_setting(
         name="AUTHORS_BOOKS_PER_PAGE",
@@ -55,21 +55,21 @@ page, we would define the following in ``authors.defaults``::
 
     If you are using Django 1.7 or greater and your app is included in your
     :django:setting:`INSTALLED_APPS` as an ``AppConfig`` (eg
-    ``authors.apps.MyCustomConfig``), Mezzanine won't import your
+    ``authors.apps.MyCustomConfig``), Cemes won't import your
     ``defaults.py`` automatically. Instead you must import it manually in your
     AppConfig's ``ready()`` method.
 
 Reading Settings
 ================
 
-Mezzanine provides a settings object via :func:`mezzanine.conf.settings` in a
+Cemes provides a settings object via :func:`cemes.conf.settings` in a
 similar way to Django's :func:`django.conf.settings`. This settings object
 contains each of the settings registered above using their names as
 attributes. Continuing on from our previous example, suppose we have a view
 for photos::
 
     from django.shortcuts import render
-    from mezzanine.conf import settings
+    from cemes.conf import settings
     from .models import Book
 
     def books_view(request):
@@ -96,24 +96,24 @@ the website.
 Django Settings
 ===============
 
-Mezzanine's settings object integrates with Django's settings object in a
+Cemes's settings object integrates with Django's settings object in a
 couple of ways.
 
 Firstly it's possible to override the default value for any setting defined
-using :func:`mezzanine.conf.register_setting` by adding its name and value as
+using :func:`cemes.conf.register_setting` by adding its name and value as
 a regular setting to your project's settings module. This is especially useful
-when any of your project's :django:setting:`INSTALLED_APPS` (including Mezzanine
+when any of your project's :django:setting:`INSTALLED_APPS` (including Cemes
 itself) register settings that aren't editable and you want to override
 these settings without modifying the application that registered them.
 
 Secondly it's possible to access any of the settings defined by Django or
-your project's settings module via Mezzanine's settings object in the same
+your project's settings module via Cemes's settings object in the same
 way you would use Django's settings object. This allows for a single access
 point for all settings regardless of how they are defined.
 
 Default Settings
 ================
 
-Mezzanine defines the following settings:
+Cemes defines the following settings:
 
 .. include:: settings.rst

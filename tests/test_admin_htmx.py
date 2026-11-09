@@ -2,18 +2,18 @@ from django.contrib.auth import get_user_model
 from django.contrib.sites.models import Site
 from django.urls import reverse
 
-from mezzanine.admin_htmx import nav
-from mezzanine.admin_htmx.introspect import (
+from cemes.admin_htmx import nav
+from cemes.admin_htmx.introspect import (
     content_models,
     filter_media,
     get_model_admin,
     is_concrete_content_model,
 )
-from mezzanine.blog.models import BlogPost
-from mezzanine.conf import settings
-from mezzanine.core.models import CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED
-from mezzanine.pages.models import Page, RichTextPage
-from mezzanine.utils.tests import TestCase
+from cemes.blog.models import BlogPost
+from cemes.conf import settings
+from cemes.core.models import CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED
+from cemes.pages.models import Page, RichTextPage
+from cemes.utils.tests import TestCase
 
 User = get_user_model()
 
@@ -31,7 +31,7 @@ class AdminHtmxTestCase(TestCase):
     The htmx admin reads everything from the registered ModelAdmin
     classes, so these tests are mostly about that reuse holding: that
     the pages the interface serves reflect what the admin classes say,
-    and that Mezzanine's admin behaviours - content typed redirection,
+    and that Cemes's admin behaviours - content typed redirection,
     per-site staff access, the single form for settings - survive the
     move.
 
@@ -395,7 +395,7 @@ class PageTreeTests(AdminHtmxTestCase):
             reverse("admin_htmx:change", args=("pages", "richtextpage", page.pk)),
         )
 
-    def test_reordering_goes_through_mezzanines_own_view(self):
+    def test_reordering_goes_through_cemess_own_view(self):
         first = RichTextPage.objects.create(title="First")
         second = RichTextPage.objects.create(title="Second")
         response = self.client.post(
@@ -447,7 +447,7 @@ class SettingsTests(AdminHtmxTestCase):
         """
         from django import forms
 
-        from mezzanine.conf.forms import SettingsForm
+        from cemes.conf.forms import SettingsForm
 
         form = SettingsForm()
         data = {}
@@ -514,8 +514,8 @@ class MediaFilterTests(TestCase):
 
         media = forms.Media(
             js=[
-                "mezzanine/js/admin/dynamic_inline.js",
-                "mezzanine/tinymce/tinymce.min.js",
+                "cemes/js/admin/dynamic_inline.js",
+                "cemes/tinymce/tinymce.min.js",
             ]
         )
         kept = [str(path) for path in filter_media(media)._js]
@@ -525,12 +525,12 @@ class MediaFilterTests(TestCase):
     def test_widget_css_is_kept(self):
         from django import forms
 
-        media = forms.Media(css={"all": ["mezzanine/css/admin/form.css"]})
+        media = forms.Media(css={"all": ["cemes/css/admin/form.css"]})
         self.assertEqual(len(filter_media(media)._css["all"]), 1)
 
     def test_jquery_shim_is_inserted_right_after_jquery_init(self):
         """
-        Mezzanine's widget scripts call the global jQuery that Grappelli
+        Cemes's widget scripts call the global jQuery that Grappelli
         provides; Django only exposes django.jQuery. The shim restoring
         the alias has to run after jquery.init.js and before any script
         that depends on it.
@@ -541,7 +541,7 @@ class MediaFilterTests(TestCase):
             js=[
                 "admin/js/vendor/jquery/jquery.js",
                 "admin/js/jquery.init.js",
-                "mezzanine/js/admin/keywords_field.js",
+                "cemes/js/admin/keywords_field.js",
             ]
         )
         js = [str(path) for path in filter_media(media)._js]
@@ -554,7 +554,7 @@ class MediaFilterTests(TestCase):
     def test_no_shim_when_jquery_init_is_absent(self):
         from django import forms
 
-        media = forms.Media(js=["mezzanine/tinymce/tinymce.min.js"])
+        media = forms.Media(js=["cemes/tinymce/tinymce.min.js"])
         js = [str(path) for path in filter_media(media)._js]
         self.assertFalse(any("jquery-compat" in path for path in js))
 
@@ -605,7 +605,7 @@ class IntrospectionTests(TestCase):
 class SiteFilteringTests(AdminHtmxTestCase):
     def test_changelist_respects_the_admins_queryset(self):
         """
-        Mezzanine's admin querysets are filtered to the current site, so
+        Cemes's admin querysets are filtered to the current site, so
         objects belonging to another site must not leak into the list.
         """
         other = Site.objects.create(domain="other.example.com", name="Other")

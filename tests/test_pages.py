@@ -13,16 +13,16 @@ from django.template import Context, Template, TemplateSyntaxError
 from django.test.utils import override_settings
 from django.utils.translation import get_language
 
-from mezzanine.conf import settings
-from mezzanine.core.models import CONTENT_STATUS_PUBLISHED
-from mezzanine.core.request import current_request
-from mezzanine.pages.admin import PageAdminForm
-from mezzanine.pages.checks import check_context_processor
-from mezzanine.pages.fields import MenusField
-from mezzanine.pages.models import Page, RichTextPage
-from mezzanine.urls import PAGES_SLUG
-from mezzanine.utils.sites import override_current_site_id
-from mezzanine.utils.tests import TestCase
+from cemes.conf import settings
+from cemes.core.models import CONTENT_STATUS_PUBLISHED
+from cemes.core.request import current_request
+from cemes.pages.admin import PageAdminForm
+from cemes.pages.checks import check_context_processor
+from cemes.pages.fields import MenusField
+from cemes.pages.models import Page, RichTextPage
+from cemes.urls import PAGES_SLUG
+from cemes.utils.sites import override_current_site_id
+from cemes.utils.tests import TestCase
 
 User = get_user_model()
 
@@ -33,14 +33,14 @@ class PagesTests(TestCase):
         Make sure we have a thread-local request with a site_id attribute set.
         """
         super().setUp()
-        from mezzanine.core.request import _thread_local
+        from cemes.core.request import _thread_local
 
         request = self._request_factory.get("/")
         request.site_id = settings.SITE_ID
         _thread_local.request = request
 
     def tearDown(self):
-        from mezzanine.core.request import _thread_local
+        from cemes.core.request import _thread_local
 
         try:
             del _thread_local.request
@@ -173,7 +173,7 @@ class PagesTests(TestCase):
         private, _ = RichTextPage.objects.get_or_create(
             title="Private", slug="private", login_required=True
         )
-        accounts_installed = "mezzanine.accounts" in settings.INSTALLED_APPS
+        accounts_installed = "cemes.accounts" in settings.INSTALLED_APPS
 
         args = {"for_user": AnonymousUser()}
         self.assertTrue(public in RichTextPage.objects.published(**args))
@@ -206,7 +206,7 @@ class PagesTests(TestCase):
             login_next = quote_plus(login_next)
         login = f"{login_prefix}{login_url}?next={login_next}"
         if accounts_installed:
-            # For an inaccessible page with mezzanine.accounts we should
+            # For an inaccessible page with cemes.accounts we should
             # see a login page, without it 404 is more appropriate than an
             # admin login.
             target_status_code = 200
@@ -233,7 +233,7 @@ class PagesTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
         if accounts_installed:
-            with override_settings(LOGIN_URL="mezzanine.accounts.views.login"):
+            with override_settings(LOGIN_URL="cemes.accounts.views.login"):
                 response = self.client.get(public_url, follow=True)
                 self.assertEqual(response.status_code, 200)
                 response = self.client.get(private_url, follow=True)
@@ -245,7 +245,7 @@ class PagesTests(TestCase):
                 self.assertEqual(response.status_code, 200)
 
     def test_set_model_permissions(self):
-        from mezzanine.core.request import _thread_local
+        from cemes.core.request import _thread_local
 
         template = (
             "{% load pages_tags %}" "{% set_model_permissions model %}{{ model.perms }}"
@@ -258,7 +258,7 @@ class PagesTests(TestCase):
         self.assertIsNotNone(rendered)
 
     def test_set_page_permissions(self):
-        from mezzanine.core.request import _thread_local
+        from cemes.core.request import _thread_local
 
         template = (
             "{% load pages_tags %}" "{% set_page_permissions page %}{{ page.perms }}"
@@ -281,7 +281,7 @@ class PagesTests(TestCase):
             Template(template).render(Context({}))
 
     def test_page_menu_slug_home(self):
-        from mezzanine.core.request import _thread_local
+        from cemes.core.request import _thread_local
 
         home, _ = RichTextPage.objects.get_or_create(slug="/", title="home")
         template = "{% load pages_tags %}" '{% page_menu "pages/menus/tree.html" %}'
@@ -387,7 +387,7 @@ class PagesTests(TestCase):
         Test that passing an unicode slug to processor_for works for
         python 2.x
         """
-        from mezzanine.pages.page_processors import processor_for
+        from cemes.pages.page_processors import processor_for
 
         @processor_for("test unicode string")
         def test_page_processor(request, page):
@@ -400,9 +400,9 @@ class PagesTests(TestCase):
         """
         Test that passing exact_page=True works with the PageMiddleware
         """
-        from mezzanine.pages.middleware import PageMiddleware
-        from mezzanine.pages.page_processors import processor_for
-        from mezzanine.pages.views import page as page_view
+        from cemes.pages.middleware import PageMiddleware
+        from cemes.pages.page_processors import processor_for
+        from cemes.pages.views import page as page_view
 
         @processor_for("foo/bar", exact_page=True)
         def test_page_processor(request, page):
@@ -434,7 +434,7 @@ class PagesTests(TestCase):
 
         from django.utils.translation import activate, get_language
 
-        from mezzanine.utils.urls import slugify
+        from cemes.utils.urls import slugify
 
         default_language = get_language()
         code_list = OrderedDict(settings.LANGUAGES)
@@ -496,14 +496,14 @@ class PagesTests(TestCase):
             self.assertListEqual(grandchild.get_ascendants(), [child, parent])
 
     def test_check_context_processor(self):
-        context_processor = "mezzanine.pages.context_processors.page"
+        context_processor = "cemes.pages.context_processors.page"
         templates = [{"OPTIONS": {"context_processors": context_processor}}]
         expected_warning = [
             Warning(
-                "You haven't included 'mezzanine.pages.context_processors.page' "
+                "You haven't included 'cemes.pages.context_processors.page' "
                 "as a context processor in any of your template configurations. "
                 "Your templates might not work as expected.",
-                id="mezzanine.pages.W01",
+                id="cemes.pages.W01",
             )
         ]
         app_config = apps.get_app_config("pages")

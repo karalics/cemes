@@ -1,6 +1,6 @@
 [run]
 omit =
-  mezzanine/*/migrations/*
+  cemes/*/migrations/*
   */tests/*
 
 [report]

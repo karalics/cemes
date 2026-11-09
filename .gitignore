@@ -15,12 +15,12 @@ local_settings.py
 .eggs/
 .tox/
 .venv/
-Mezzanine.egg-info/
+Cemes.egg-info/
 build/
 docs/build/
 docs/_build/
 dist/
 htmlcov/
-mezzanine/project_template/static/
-/mezzanine/.project
-/mezzanine/.pydevproject
+cemes/project_template/static/
+/cemes/.project
+/cemes/.pydevproject

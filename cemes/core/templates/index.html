@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_title %}{% trans "Home" %}{% endblock %}
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block breadcrumb_menu %}
+<li class="active">{% trans "Home" %}</li>
+{% endblock %}
+
+{% block main %}
+{% blocktrans %}
+<h2>Congratulations!</h2>
+<p>
+    Welcome to your new Cemes powered website.
+    Here are some quick links to get you started:
+</p>
+<ul>
+    <li><a href="/admin/">Log in to the admin interface</a></li>
+    <li><a href="https://github.com/stephenmcd/mezzanine/blob/master/docs/content-architecture.rst#creating-custom-content-types">Creating custom page types</a></li>
+    <li><a href="https://github.com/stephenmcd/mezzanine/blob/master/docs/frequently-asked-questions.rst#where-are-all-the-templates-i-can-modify">Modifying HTML templates</a></li>
+    <li><a href="https://github.com/stephenmcd/mezzanine/blob/master/docs/frequently-asked-questions.rst#why-isnt-the-homepage-a-page-object-i-can-edit-via-the-admin">Changing this homepage</a></li>
+    <li><a href="https://github.com/stephenmcd/mezzanine/blob/master/docs/frequently-asked-questions.rst">Other frequently asked questions</a></li>
+    <li><a href="https://github.com/stephenmcd/mezzanine/blob/master/docs/configuration.rst#default-settings">Full list of settings</a></li>
+    <li><a href="https://github.com/stephenmcd/mezzanine/blob/master/docs/deployment.rst">Deploying to a production server</a></li>
+</ul>
+{% endblocktrans %}
+{% endblock %}

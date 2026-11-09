@@ -8,11 +8,11 @@ from django.template import Context, Template
 from django.test import override_settings
 from django.urls import reverse
 
-from mezzanine.blog.models import BlogPost
-from mezzanine.conf import settings
-from mezzanine.core.models import CONTENT_STATUS_PUBLISHED
-from mezzanine.pages.models import Page, RichTextPage
-from mezzanine.utils.tests import TestCase
+from cemes.blog.models import BlogPost
+from cemes.conf import settings
+from cemes.core.models import CONTENT_STATUS_PUBLISHED
+from cemes.pages.models import Page, RichTextPage
+from cemes.utils.tests import TestCase
 
 
 class BlogTests(TestCase):
@@ -33,8 +33,8 @@ class BlogTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     @skipUnless(
-        "mezzanine.accounts" in settings.INSTALLED_APPS
-        and "mezzanine.pages" in settings.INSTALLED_APPS,
+        "cemes.accounts" in settings.INSTALLED_APPS
+        and "cemes.pages" in settings.INSTALLED_APPS,
         "accounts and pages apps required",
     )
     def test_login_protected_blog(self):

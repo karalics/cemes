@@ -1,5 +1,5 @@
 #
-# Mezzanine documentation build configuration file, created by
+# Cemes documentation build configuration file, created by
 # sphinx-quickstart on Wed Mar 10 07:20:42 2010.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -14,22 +14,22 @@ import os
 import sys
 from datetime import datetime
 
-import mezzanine
+import cemes
 
 if "DJANGO_SETTINGS_MODULE" not in os.environ:
     docs_path = os.getcwd()
-    mezzanine_path_parts = (docs_path, "..")
+    cemes_path_parts = (docs_path, "..")
     sys.path.insert(0, docs_path)
-    sys.path.insert(0, os.path.realpath(os.path.join(*mezzanine_path_parts)))
+    sys.path.insert(0, os.path.realpath(os.path.join(*cemes_path_parts)))
     os.environ["DJANGO_SETTINGS_MODULE"] = "docs_settings"
     import django
 
     django.setup()
 
 # When a full build is run (eg from the root of the repo), we
-# run all the Mezzanine utils for dynamically generated docs.
+# run all the Cemes utils for dynamically generated docs.
 if sys.argv[-2:] == ["docs", "docs/build"]:
-    from mezzanine.utils import docs
+    from cemes.utils import docs
 
     docs.build_settings_docs(docs_path)
     docs.build_modelgraph(docs_path)
@@ -73,7 +73,7 @@ intersphinx_mapping = {
 master_doc = "index"
 
 # General information about the project.
-project = "Mezzanine"
+project = "Cemes"
 copyright = "2009 - %s, Stephen McDonald" % datetime.now().year
 
 # The version info for the project you're documenting, acts as replacement for
@@ -88,7 +88,7 @@ if release_tag:
     version = release.rsplit(".", 1)[0]
 else:
     # The full version, including alpha/beta/rc tags.
-    release = mezzanine.__version__
+    release = cemes.__version__
     # The short X.Y version.
     version = release.rsplit("dev", 1)[0]
 
@@ -206,7 +206,7 @@ pygments_style = "sphinx"
 # html_file_suffix = ''
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "Mezzaninedoc"
+htmlhelp_basename = "Cemesdoc"
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -220,7 +220,7 @@ htmlhelp_basename = "Mezzaninedoc"
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ("index", "Mezzanine.tex", "Mezzanine Documentation", "Stephen McDonald", "manual"),
+    ("index", "Cemes.tex", "Cemes Documentation", "Stephen McDonald", "manual"),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -242,5 +242,5 @@ latex_documents = [
 
 
 html_theme_path = ["."]
-html_theme = "mezzanine_theme"
+html_theme = "cemes_theme"
 locale_dirs = ["./locale/"]

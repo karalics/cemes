@@ -4,18 +4,18 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import Context, Template
 from django.urls import reverse
 
-from mezzanine.blog.models import BlogPost
-from mezzanine.conf import settings
-from mezzanine.core.models import CONTENT_STATUS_PUBLISHED
-from mezzanine.generic.forms import KeywordsWidget, RatingForm
-from mezzanine.generic.models import AssignedKeyword, Keyword, ThreadedComment
-from mezzanine.generic.views import comment
-from mezzanine.pages.models import RichTextPage
-from mezzanine.utils.tests import TestCase
+from cemes.blog.models import BlogPost
+from cemes.conf import settings
+from cemes.core.models import CONTENT_STATUS_PUBLISHED
+from cemes.generic.forms import KeywordsWidget, RatingForm
+from cemes.generic.models import AssignedKeyword, Keyword, ThreadedComment
+from cemes.generic.views import comment
+from cemes.pages.models import RichTextPage
+from cemes.utils.tests import TestCase
 
 
 class GenericTests(TestCase):
-    @skipUnless("mezzanine.blog" in settings.INSTALLED_APPS, "blog app required")
+    @skipUnless("cemes.blog" in settings.INSTALLED_APPS, "blog app required")
     def test_rating(self):
         """
         Test that ratings can be posted and avarage/count are calculated.
@@ -29,7 +29,7 @@ class GenericTests(TestCase):
         for value in settings.RATINGS_RANGE:
             data["value"] = value
             response = self.client.post(reverse("rating"), data=data)
-            response.delete_cookie("mezzanine-rating")
+            response.delete_cookie("cemes-rating")
         blog_post = BlogPost.objects.get(id=blog_post.id)
         count = len(settings.RATINGS_RANGE)
         _sum = sum(settings.RATINGS_RANGE)
@@ -43,10 +43,10 @@ class GenericTests(TestCase):
             self.assertEqual(blog_post.rating_sum, _sum)
             self.assertEqual(blog_post.rating_average, average)
 
-    @skipUnless("mezzanine.blog" in settings.INSTALLED_APPS, "blog app required")
+    @skipUnless("cemes.blog" in settings.INSTALLED_APPS, "blog app required")
     def test_comment_ratings(self):
         """
-        Test that a generic relation defined on one of Mezzanine's generic
+        Test that a generic relation defined on one of Cemes's generic
         models (in this case ratings of comments) correctly sets its
         extra fields.
         """
@@ -70,7 +70,7 @@ class GenericTests(TestCase):
             (settings.RATINGS_RANGE[0] + settings.RATINGS_RANGE[-1]) / 2,
         )
 
-    @skipUnless("mezzanine.blog" in settings.INSTALLED_APPS, "blog app required")
+    @skipUnless("cemes.blog" in settings.INSTALLED_APPS, "blog app required")
     def test_comment_queries(self):
         """
         Test that rendering comments executes the same number of
@@ -97,7 +97,7 @@ class GenericTests(TestCase):
         after = self.queries_used_for_template(template, **context)
         self.assertEqual(before, after)
 
-    @skipUnless("mezzanine.pages" in settings.INSTALLED_APPS, "pages app required")
+    @skipUnless("cemes.pages" in settings.INSTALLED_APPS, "pages app required")
     def test_keywords(self):
         """
         Test that the keywords_string field is correctly populated.

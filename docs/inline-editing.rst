@@ -2,7 +2,7 @@
 In-line Editing
 ===============
 
-Mezzanine comes with the ability for content authors to edit content
+Cemes comes with the ability for content authors to edit content
 directly within a page while viewing it on the website, rather than having
 to log into the admin area. Content authors can simply log into the admin
 area as usual, but by selecting *Site* on the login screen the author will
@@ -19,7 +19,7 @@ Template Configuration
 
 Making content in-line editable is as simple as wrapping model
 fields with a template tag in your templates. The default templates
-installed with Mezzanine all have their content configured to be in-line
+installed with Cemes all have their content configured to be in-line
 editable. When developing your own templates from scratch though, you'll
 need to perform this step yourself.
 
@@ -28,7 +28,7 @@ right before the closing ``</body>`` tag in each template. The recommended
 way to do this is to include ``includes/footer_scripts`` in your top-most
 base template::
 
-    {% load mezzanine_tags %}
+    {% load cemes_tags %}
     <html>
     <head>
         <title>My Website</title>
@@ -47,7 +47,7 @@ the `$` symbol.
 ::
 
     {% if user.is_staff %}
-        <script src="{{ STATIC_URL }}mezzanine/js/jquery-1.8.3.min.js">
+        <script src="{{ STATIC_URL }}cemes/js/jquery-1.8.3.min.js">
             jQuery.noConflict();
         </script>
     {% endif %}
@@ -63,7 +63,7 @@ be used. The model field must always be specified in the format
 instance in the template context. For example, suppose we had a ``page``
 variable in our template with ``title`` and ``content`` fields::
 
-    {% load mezzanine_tags %}
+    {% load cemes_tags %}
     <html>
     <head>
         <title>{{ page.title }}</title>
@@ -102,7 +102,7 @@ each of the fields specified for editing, grouped together in a single form.
 Continuing on from the previous example, if we wanted to group together
 the ``title`` and ``content`` fields::
 
-    {% load mezzanine_tags %}
+    {% load cemes_tags %}
     <html>
     <head>
         <title>{{ page.title }}</title>

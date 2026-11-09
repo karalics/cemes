@@ -26,26 +26,23 @@ from django.utils.html import strip_tags
 from django.utils.timezone import datetime, now, timedelta
 from requirements import parse
 
-from mezzanine.conf import settings
-from mezzanine.core.admin import BaseDynamicInlineAdmin
-from mezzanine.core.fields import MultiChoiceField, RichTextField
-from mezzanine.core.managers import DisplayableManager
-from mezzanine.core.middleware import FetchFromCacheMiddleware
-from mezzanine.core.models import CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED
-from mezzanine.core.templatetags.mezzanine_tags import initialize_nevercache
-from mezzanine.forms.admin import FieldAdmin
-from mezzanine.forms.models import Form
-from mezzanine.pages.models import Page, RichTextPage
-from mezzanine.utils.cache import cache_installed
-from mezzanine.utils.deprecation import (
-    get_middleware_setting,
-    get_middleware_setting_name,
-)
-from mezzanine.utils.html import TagCloser, escape
-from mezzanine.utils.importing import import_dotted_path
-from mezzanine.utils.sites import current_site_id, override_current_site_id
-from mezzanine.utils.tests import TestCase
-from mezzanine.utils.urls import admin_url
+from cemes.conf import settings
+from cemes.core.admin import BaseDynamicInlineAdmin
+from cemes.core.fields import MultiChoiceField, RichTextField
+from cemes.core.managers import DisplayableManager
+from cemes.core.middleware import FetchFromCacheMiddleware
+from cemes.core.models import CONTENT_STATUS_DRAFT, CONTENT_STATUS_PUBLISHED
+from cemes.core.templatetags.cemes_tags import initialize_nevercache
+from cemes.forms.admin import FieldAdmin
+from cemes.forms.models import Form
+from cemes.pages.models import Page, RichTextPage
+from cemes.utils.cache import cache_installed
+from cemes.utils.deprecation import get_middleware_setting, get_middleware_setting_name
+from cemes.utils.html import TagCloser, escape
+from cemes.utils.importing import import_dotted_path
+from cemes.utils.sites import current_site_id, override_current_site_id
+from cemes.utils.tests import TestCase
+from cemes.utils.urls import admin_url
 
 BRANCH_NAME = (
     subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
@@ -53,7 +50,7 @@ BRANCH_NAME = (
     .strip()
 )
 VERSION_WARN = (
-    "Unpinned or pre-release dependencies detected in Mezzanine's requirements: {}"
+    "Unpinned or pre-release dependencies detected in Cemes's requirements: {}"
 )
 
 
@@ -63,13 +60,13 @@ VERSION_WARN = (
 def test_stable_dependencies():
     """
     This test is meant for CI. We want to make sure that when building the `stable`
-    branch of Mezzanine the dependencies are also stable so that we don't publish a
-    stable Mezzanine release with unstable dependencies.
+    branch of Cemes the dependencies are also stable so that we don't publish a
+    stable Cemes release with unstable dependencies.
     """
     # If a requirement is listed via a git or http url the `specs` attribute will be an
     # empty list, so we use it to check for "pre-release" status
     requirements = [
-        list(parse(r))[0] for r in requires("mezzanine") if "extra == " not in r
+        list(parse(r))[0] for r in requires("cemes") if "extra == " not in r
     ]
     prereleases = [r.name for r in requirements if not r.specs]
     assert not prereleases, VERSION_WARN.format(", ".join(prereleases))
@@ -94,20 +91,20 @@ class CoreTests(TestCase):
 
     def test_utils(self):
         """
-        Miscellanous tests for the ``mezzanine.utils`` package.
+        Miscellanous tests for the ``cemes.utils`` package.
         """
-        self.assertRaises(ImportError, import_dotted_path, "mezzanine")
-        self.assertRaises(ImportError, import_dotted_path, "mezzanine.NO")
-        self.assertRaises(ImportError, import_dotted_path, "mezzanine.core.NO")
+        self.assertRaises(ImportError, import_dotted_path, "cemes")
+        self.assertRaises(ImportError, import_dotted_path, "cemes.NO")
+        self.assertRaises(ImportError, import_dotted_path, "cemes.core.NO")
         try:
-            import_dotted_path("mezzanine.core")
+            import_dotted_path("cemes.core")
         except ImportError:
             self.fail(
-                "mezzanine.utils.imports.import_dotted_path"
-                'could not import "mezzanine.core"'
+                "cemes.utils.imports.import_dotted_path"
+                'could not import "cemes.core"'
             )
 
-    @skipUnless("mezzanine.pages" in settings.INSTALLED_APPS, "pages app required")
+    @skipUnless("cemes.pages" in settings.INSTALLED_APPS, "pages app required")
     def test_description(self):
         """
         Test generated description is text version of the first line
@@ -117,7 +114,7 @@ class CoreTests(TestCase):
         page = RichTextPage.objects.create(title="Draft", content=description * 3)
         self.assertEqual(page.description, strip_tags(description))
 
-    @skipUnless("mezzanine.pages" in settings.INSTALLED_APPS, "pages app required")
+    @skipUnless("cemes.pages" in settings.INSTALLED_APPS, "pages app required")
     def test_draft(self):
         """
         Test a draft object as only being viewable by a staff member.
@@ -139,7 +136,7 @@ class CoreTests(TestCase):
         manager = DisplayableManager(search_fields={"foo": 10})
         self.assertTrue(manager._search_fields)
 
-    @skipUnless("mezzanine.pages" in settings.INSTALLED_APPS, "pages app required")
+    @skipUnless("cemes.pages" in settings.INSTALLED_APPS, "pages app required")
     def test_search(self):
         """
         Objects with status "Draft" should not be within search results.
@@ -231,7 +228,7 @@ class CoreTests(TestCase):
         response = self.client.get(pages[0].get_absolute_url(), follow=True)
         self.assertEqual(response.status_code, code)
 
-    @skipUnless("mezzanine.pages" in settings.INSTALLED_APPS, "pages app required")
+    @skipUnless("cemes.pages" in settings.INSTALLED_APPS, "pages app required")
     def test_multisite(self):
         from django.conf import settings
 
@@ -325,7 +322,7 @@ class CoreTests(TestCase):
             action = response.request["PATH_INFO"]
         return action
 
-    @skipUnless("mezzanine.pages" in settings.INSTALLED_APPS, "pages app required")
+    @skipUnless("cemes.pages" in settings.INSTALLED_APPS, "pages app required")
     @override_settings(LANGUAGE_CODE="en")
     def test_password_reset(self):
         """
@@ -483,18 +480,18 @@ class CoreTests(TestCase):
     def test_cache_installed(self):
 
         test_contexts = [
-            (False, ["mezzanine.core.middleware.FetchFromCacheMiddleware"]),
+            (False, ["cemes.core.middleware.FetchFromCacheMiddleware"]),
             (
                 True,
                 [
-                    "mezzanine.core.middleware.UpdateCacheMiddleware",
+                    "cemes.core.middleware.UpdateCacheMiddleware",
                     "tests.test_core.SubclassMiddleware",
                 ],
             ),
             (
                 True,
                 [
-                    "mezzanine.core.middleware.UpdateCacheMiddleware",
+                    "cemes.core.middleware.UpdateCacheMiddleware",
                     "tests.test_core.FetchFromCacheMiddleware",
                     "tests.test_core.function_middleware",
                 ],
@@ -502,8 +499,8 @@ class CoreTests(TestCase):
             (
                 True,
                 [
-                    "mezzanine.core.middleware.UpdateCacheMiddleware",
-                    "mezzanine.core.middleware.FetchFromCacheMiddleware",
+                    "cemes.core.middleware.UpdateCacheMiddleware",
+                    "cemes.core.middleware.FetchFromCacheMiddleware",
                 ],
             ),
         ]
@@ -529,7 +526,7 @@ def function_middleware(get_response):
     return middleware
 
 
-@skipUnless("mezzanine.pages" in settings.INSTALLED_APPS, "pages app required")
+@skipUnless("cemes.pages" in settings.INSTALLED_APPS, "pages app required")
 class SiteRelatedTestCase(TestCase):
     def test_update_site(self):
         from django.conf import settings
@@ -614,7 +611,7 @@ class SiteRelatedTestCase(TestCase):
 
 class CSRFTestViews:
     def nevercache_view(request):
-        template = "{% load mezzanine_tags %}"
+        template = "{% load cemes_tags %}"
         template += "{% nevercache %}"
         template += "{% csrf_token %}"
         template += "{% endnevercache %}"
@@ -644,10 +641,10 @@ class CSRFTestCase(TestCase):
                 }
             },
             get_middleware_setting_name(): (
-                "mezzanine.core.middleware.UpdateCacheMiddleware",
+                "cemes.core.middleware.UpdateCacheMiddleware",
             )
             + get_middleware_setting()
-            + ("mezzanine.core.middleware.FetchFromCacheMiddleware",),
+            + ("cemes.core.middleware.FetchFromCacheMiddleware",),
             "TESTING": False,
         }
     )
@@ -765,17 +762,17 @@ class TestTemplateTags:
     @pytest.mark.parametrize(
         "app, result",
         (
-            pytest.param("mezzanine.core", True, id="Existing app, no quotes"),
-            pytest.param("'mezzanine.core'", True, id="Existing app, single quotes"),
-            pytest.param('"mezzanine.core"', True, id="Existing app, double quotes"),
-            pytest.param("mezzanine.nope", False, id="Missing app, no quotes"),
-            pytest.param("'mezzanine.nope'", False, id="Missing app, single quotes"),
-            pytest.param('"mezzanine.nope"', False, id="Missing app, double quotes"),
+            pytest.param("cemes.core", True, id="Existing app, no quotes"),
+            pytest.param("'cemes.core'", True, id="Existing app, single quotes"),
+            pytest.param('"cemes.core"', True, id="Existing app, double quotes"),
+            pytest.param("cemes.nope", False, id="Missing app, no quotes"),
+            pytest.param("'cemes.nope'", False, id="Missing app, single quotes"),
+            pytest.param('"cemes.nope"', False, id="Missing app, double quotes"),
         ),
     )
     def test_ifinstalled(self, app, result):
         template = Template(
-            "{% load mezzanine_tags %}"
+            "{% load cemes_tags %}"
             f"{{% ifinstalled {app} %}}CONTENT{{% endifinstalled %}}"
         )
         html = template.render(Context({}))
@@ -787,7 +784,7 @@ class TestTemplateTags:
         """
         template = Template(
             """
-            {% load mezzanine_tags %}"
+            {% load cemes_tags %}"
             {% ifinstalled "missing_app" %}
             {% include "missing_app/index.html" %}
             {% endifinstalled %}

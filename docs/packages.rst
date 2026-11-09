@@ -3,460 +3,460 @@ Packages
 ========
 
 Below are auto-generated docs mostly covering each of the packages contained
-within Mezzanine that are added to ``settings.INSTALLED_APPS``.
+within Cemes that are added to ``settings.INSTALLED_APPS``.
 
 
 
 
-``mezzanine.boot``
+``cemes.boot``
 ==================
 
-.. automodule:: mezzanine.boot
+.. automodule:: cemes.boot
    :members:
 
 
 
-``mezzanine.core``
+``cemes.core``
 ==================
 
-.. automodule:: mezzanine.core
+.. automodule:: cemes.core
 
-``mezzanine.core.models``
+``cemes.core.models``
 -------------------------
 
-.. automodule:: mezzanine.core.models
+.. automodule:: cemes.core.models
    :members:
 
-``mezzanine.core.managers``
+``cemes.core.managers``
 ---------------------------
 
-.. automodule:: mezzanine.core.managers
+.. automodule:: cemes.core.managers
    :members:
 
-``mezzanine.core.views``
+``cemes.core.views``
 ------------------------
 
-.. automodule:: mezzanine.core.views
+.. automodule:: cemes.core.views
    :members:
 
-``mezzanine.core.forms``
+``cemes.core.forms``
 ------------------------
 
-.. automodule:: mezzanine.core.forms
+.. automodule:: cemes.core.forms
    :members:
 
-``mezzanine.core.admin``
+``cemes.core.admin``
 ------------------------
 
-.. automodule:: mezzanine.core.admin
+.. automodule:: cemes.core.admin
    :members:
 
-``mezzanine.core.middleware``
+``cemes.core.middleware``
 -----------------------------
 
-.. automodule:: mezzanine.core.middleware
+.. automodule:: cemes.core.middleware
    :members:
 
-``mezzanine.core.templatetags.mezzanine_tags``
+``cemes.core.templatetags.cemes_tags``
 ----------------------------------------------
 
-.. automodule:: mezzanine.core.templatetags.mezzanine_tags
+.. automodule:: cemes.core.templatetags.cemes_tags
    :members:
 
-``mezzanine.core.management.commands``
+``cemes.core.management.commands``
 --------------------------------------
 
-.. automodule:: mezzanine.core.management.commands.createdb
+.. automodule:: cemes.core.management.commands.createdb
    :members:
 
-``mezzanine.core.request``
+``cemes.core.request``
 --------------------------
 
-.. automodule:: mezzanine.core.request
+.. automodule:: cemes.core.request
    :members:
 
 
 
 
-``mezzanine.pages``
+``cemes.pages``
 ===================
 
-.. automodule:: mezzanine.pages
+.. automodule:: cemes.pages
 
-``mezzanine.pages.models``
+``cemes.pages.models``
 --------------------------
 
-.. automodule:: mezzanine.pages.models
+.. automodule:: cemes.pages.models
    :members:
 
-``mezzanine.pages.views``
+``cemes.pages.views``
 -------------------------
 
-.. automodule:: mezzanine.pages.views
+.. automodule:: cemes.pages.views
    :members:
 
-``mezzanine.pages.admin``
+``cemes.pages.admin``
 -------------------------
 
-.. automodule:: mezzanine.pages.admin
+.. automodule:: cemes.pages.admin
    :members:
 
-``mezzanine.pages.middleware``
+``cemes.pages.middleware``
 ------------------------------
 
-.. automodule:: mezzanine.pages.middleware
+.. automodule:: cemes.pages.middleware
    :members:
 
-``mezzanine.pages.templatetags.pages_tags``
+``cemes.pages.templatetags.pages_tags``
 -------------------------------------------
 
-.. automodule:: mezzanine.pages.templatetags.pages_tags
+.. automodule:: cemes.pages.templatetags.pages_tags
    :members:
 
-``mezzanine.pages.page_processors``
+``cemes.pages.page_processors``
 -----------------------------------
 
-.. automodule:: mezzanine.pages.page_processors
+.. automodule:: cemes.pages.page_processors
    :members:
 
 
 
 
-``mezzanine.generic``
+``cemes.generic``
 =====================
 
-.. automodule:: mezzanine.generic
+.. automodule:: cemes.generic
 
-``mezzanine.generic.models``
+``cemes.generic.models``
 ----------------------------
 
-.. automodule:: mezzanine.generic.models
+.. automodule:: cemes.generic.models
    :members:
 
-``mezzanine.generic.managers``
+``cemes.generic.managers``
 ------------------------------
 
-.. automodule:: mezzanine.generic.managers
+.. automodule:: cemes.generic.managers
    :members:
 
-``mezzanine.generic.fields``
+``cemes.generic.fields``
 ----------------------------
 
-.. automodule:: mezzanine.generic.fields
+.. automodule:: cemes.generic.fields
    :members:
 
-``mezzanine.generic.views``
+``cemes.generic.views``
 ---------------------------
 
-.. automodule:: mezzanine.generic.views
+.. automodule:: cemes.generic.views
    :members:
 
-``mezzanine.generic.forms``
+``cemes.generic.forms``
 ---------------------------
 
-.. automodule:: mezzanine.generic.forms
+.. automodule:: cemes.generic.forms
    :members:
 
-``mezzanine.generic.admin``
+``cemes.generic.admin``
 ---------------------------
 
-.. automodule:: mezzanine.generic.admin
+.. automodule:: cemes.generic.admin
    :members:
 
-``mezzanine.generic.templatetags.comment_tags``
+``cemes.generic.templatetags.comment_tags``
 -----------------------------------------------
 
-.. automodule:: mezzanine.generic.templatetags.comment_tags
+.. automodule:: cemes.generic.templatetags.comment_tags
    :members:
 
-``mezzanine.generic.templatetags.disqus_tags``
+``cemes.generic.templatetags.disqus_tags``
 -----------------------------------------------
 
-.. automodule:: mezzanine.generic.templatetags.disqus_tags
+.. automodule:: cemes.generic.templatetags.disqus_tags
    :members:
 
-``mezzanine.generic.templatetags.keyword_tags``
+``cemes.generic.templatetags.keyword_tags``
 -----------------------------------------------
 
-.. automodule:: mezzanine.generic.templatetags.keyword_tags
+.. automodule:: cemes.generic.templatetags.keyword_tags
    :members:
 
-``mezzanine.generic.templatetags.rating_tags``
+``cemes.generic.templatetags.rating_tags``
 -----------------------------------------------
 
-.. automodule:: mezzanine.generic.templatetags.rating_tags
+.. automodule:: cemes.generic.templatetags.rating_tags
    :members:
 
 
 
 
-``mezzanine.blog``
+``cemes.blog``
 ==================
 
-.. automodule:: mezzanine.blog
+.. automodule:: cemes.blog
 
-``mezzanine.blog.models``
+``cemes.blog.models``
 -------------------------
 
-.. automodule:: mezzanine.blog.models
+.. automodule:: cemes.blog.models
    :members:
 
-``mezzanine.blog.views``
+``cemes.blog.views``
 ------------------------
 
-.. automodule:: mezzanine.blog.views
+.. automodule:: cemes.blog.views
    :members:
 
-``mezzanine.blog.forms``
+``cemes.blog.forms``
 ------------------------
 
-.. automodule:: mezzanine.blog.forms
+.. automodule:: cemes.blog.forms
    :members:
 
-``mezzanine.blog.admin``
+``cemes.blog.admin``
 ------------------------
 
-.. automodule:: mezzanine.blog.admin
+.. automodule:: cemes.blog.admin
    :members:
 
-``mezzanine.blog.feeds``
+``cemes.blog.feeds``
 ------------------------
 
-.. automodule:: mezzanine.blog.feeds
+.. automodule:: cemes.blog.feeds
    :members:
 
-``mezzanine.blog.templatetags.blog_tags``
+``cemes.blog.templatetags.blog_tags``
 -----------------------------------------
 
-.. automodule:: mezzanine.blog.templatetags.blog_tags
+.. automodule:: cemes.blog.templatetags.blog_tags
    :members:
 
-``mezzanine.blog.management.base``
+``cemes.blog.management.base``
 ----------------------------------
 
-.. automodule:: mezzanine.blog.management.base
+.. automodule:: cemes.blog.management.base
    :members:
 
-``mezzanine.blog.management.commands``
+``cemes.blog.management.commands``
 --------------------------------------
 
-.. automodule:: mezzanine.blog.management.commands.import_rss
+.. automodule:: cemes.blog.management.commands.import_rss
    :members:
 
-.. automodule:: mezzanine.blog.management.commands.import_blogger
+.. automodule:: cemes.blog.management.commands.import_blogger
    :members:
 
-.. automodule:: mezzanine.blog.management.commands.import_wordpress
+.. automodule:: cemes.blog.management.commands.import_wordpress
    :members:
 
-.. automodule:: mezzanine.blog.management.commands.import_tumblr
+.. automodule:: cemes.blog.management.commands.import_tumblr
    :members:
 
 
 
-``mezzanine.accounts``
+``cemes.accounts``
 ======================
 
-.. automodule:: mezzanine.accounts
+.. automodule:: cemes.accounts
    :members:
 
-``mezzanine.accounts.views``
+``cemes.accounts.views``
 ----------------------------
 
-.. automodule:: mezzanine.accounts.views
+.. automodule:: cemes.accounts.views
    :members:
 
-``mezzanine.accounts.forms``
+``cemes.accounts.forms``
 ----------------------------
 
-.. automodule:: mezzanine.accounts.forms
+.. automodule:: cemes.accounts.forms
    :members:
 
-``mezzanine.accounts.templatetags.accounts_tags``
+``cemes.accounts.templatetags.accounts_tags``
 -------------------------------------------------
 
-.. automodule:: mezzanine.accounts.templatetags.accounts_tags
+.. automodule:: cemes.accounts.templatetags.accounts_tags
    :members:
 
-``mezzanine.accounts.admin``
+``cemes.accounts.admin``
 ----------------------------
 
-.. automodule:: mezzanine.accounts.admin
+.. automodule:: cemes.accounts.admin
    :members:
 
 
 
-``mezzanine.forms``
+``cemes.forms``
 ===================
 
-.. automodule:: mezzanine.forms
+.. automodule:: cemes.forms
 
-``mezzanine.forms.models``
+``cemes.forms.models``
 -------------------------------
 
-.. automodule:: mezzanine.forms.models
+.. automodule:: cemes.forms.models
    :members:
 
-``mezzanine.forms.forms``
+``cemes.forms.forms``
 ------------------------------
 
-.. automodule:: mezzanine.forms.forms
+.. automodule:: cemes.forms.forms
    :members:
 
-``mezzanine.forms.page_processors``
+``cemes.forms.page_processors``
 ----------------------------------------
 
-.. automodule:: mezzanine.forms.page_processors
+.. automodule:: cemes.forms.page_processors
    :members:
 
-``mezzanine.forms.admin``
+``cemes.forms.admin``
 ------------------------------
 
-.. automodule:: mezzanine.forms.admin
+.. automodule:: cemes.forms.admin
    :members:
 
 
 
 
-``mezzanine.galleries``
+``cemes.galleries``
 =======================
 
-.. automodule:: mezzanine.galleries
+.. automodule:: cemes.galleries
 
-``mezzanine.galleries.models``
+``cemes.galleries.models``
 -------------------------------
 
-.. automodule:: mezzanine.galleries.models
+.. automodule:: cemes.galleries.models
    :members:
 
-``mezzanine.galleries.admin``
+``cemes.galleries.admin``
 -------------------------------
 
-.. automodule:: mezzanine.galleries.admin
+.. automodule:: cemes.galleries.admin
    :members:
 
 
 
 
-``mezzanine.conf``
+``cemes.conf``
 ==================
 
-.. automodule:: mezzanine.conf
+.. automodule:: cemes.conf
    :members:
 
-``mezzanine.conf.models``
+``cemes.conf.models``
 -------------------------
 
-.. automodule:: mezzanine.conf.models
+.. automodule:: cemes.conf.models
    :members:
 
-``mezzanine.conf.forms``
+``cemes.conf.forms``
 ------------------------
 
-.. automodule:: mezzanine.conf.forms
+.. automodule:: cemes.conf.forms
    :members:
 
-``mezzanine.conf.admin``
+``cemes.conf.admin``
 ------------------------
 
-.. automodule:: mezzanine.conf.admin
+.. automodule:: cemes.conf.admin
    :members:
 
-``mezzanine.conf.context_processors``
+``cemes.conf.context_processors``
 -------------------------------------
 
-.. automodule:: mezzanine.conf.context_processors
+.. automodule:: cemes.conf.context_processors
    :members:
 
 
 
 
-``mezzanine.template``
+``cemes.template``
 ======================
 
-.. automodule:: mezzanine.template
+.. automodule:: cemes.template
    :members:
 
-``mezzanine.template.loader_tags``
+``cemes.template.loader_tags``
 ==================================
 
-.. automodule:: mezzanine.template.loader_tags
+.. automodule:: cemes.template.loader_tags
    :members:
 
 
 
 
-``mezzanine.twitter``
+``cemes.twitter``
 =====================
 
-.. automodule:: mezzanine.twitter
+.. automodule:: cemes.twitter
 
-``mezzanine.twitter.models``
+``cemes.twitter.models``
 ----------------------------
 
-.. automodule:: mezzanine.twitter.models
+.. automodule:: cemes.twitter.models
    :members:
 
-``mezzanine.twitter.managers``
+``cemes.twitter.managers``
 ------------------------------
 
-.. automodule:: mezzanine.twitter.managers
+.. automodule:: cemes.twitter.managers
    :members:
 
-``mezzanine.twitter.templatetags.twitter_tags``
+``cemes.twitter.templatetags.twitter_tags``
 -----------------------------------------------
 
-.. automodule:: mezzanine.twitter.templatetags.twitter_tags
+.. automodule:: cemes.twitter.templatetags.twitter_tags
    :members:
 
-``mezzanine.twitter.management.commands``
+``cemes.twitter.management.commands``
 -----------------------------------------
 
-.. automodule:: mezzanine.twitter.management.commands.poll_twitter
+.. automodule:: cemes.twitter.management.commands.poll_twitter
    :members:
 
 
 
 
-``mezzanine.utils``
+``cemes.utils``
 ===================
 
-.. automodule:: mezzanine.utils
+.. automodule:: cemes.utils
 
-.. automodule:: mezzanine.utils.cache
+.. automodule:: cemes.utils.cache
    :members:
 
-.. automodule:: mezzanine.utils.conf
+.. automodule:: cemes.utils.conf
    :members:
 
-.. automodule:: mezzanine.utils.docs
+.. automodule:: cemes.utils.docs
    :members:
 
-.. automodule:: mezzanine.utils.email
+.. automodule:: cemes.utils.email
    :members:
 
-.. automodule:: mezzanine.utils.html
+.. automodule:: cemes.utils.html
    :members:
 
-.. automodule:: mezzanine.utils.importing
+.. automodule:: cemes.utils.importing
    :members:
 
-.. automodule:: mezzanine.utils.models
+.. automodule:: cemes.utils.models
    :members:
 
-.. automodule:: mezzanine.utils.sites
+.. automodule:: cemes.utils.sites
    :members:
 
-.. automodule:: mezzanine.utils.tests
+.. automodule:: cemes.utils.tests
    :members:
 
-.. automodule:: mezzanine.utils.timezone
+.. automodule:: cemes.utils.timezone
    :members:
 
-.. automodule:: mezzanine.utils.urls
+.. automodule:: cemes.utils.urls
    :members:
 
-.. automodule:: mezzanine.utils.views
+.. automodule:: cemes.utils.views
    :members:
 
 

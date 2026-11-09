@@ -1,0 +1,30 @@
+{% load i18n %}
+{% comment %}
+One level of the page tree, recursing into children. Each list item
+carries its page id so the reorder request can name the moved page, its
+new parent and the new sibling order, which is what
+``cemes.pages.views.admin_page_ordering`` expects.
+{% endcomment %}
+<ul class="tree-branch">
+  {% for node in nodes %}
+    <li class="tree-node" data-page-id="{{ node.page.id }}" draggable="true">
+      <div class="tree-row">
+        <span class="drag-handle" aria-hidden="true">⠿</span>
+        {% if node.can_change %}
+          <a class="tree-title" href="{{ node.change_url }}">{{ node.title }}</a>
+        {% else %}
+          <span class="tree-title">{{ node.title }}</span>
+        {% endif %}
+        <span class="badge {% if node.is_published %}published{% else %}draft{% endif %}">
+          {{ node.status }}</span>
+        {% if node.delete_url %}
+          <a class="tree-delete" href="{{ node.delete_url }}"
+             title="{% trans "Delete" %}" aria-label="{% trans "Delete" %}">&times;</a>
+        {% endif %}
+      </div>
+      {% if node.children %}
+        {% include "admin_htmx/includes/page_branch.html" with nodes=node.children %}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

@@ -3,12 +3,12 @@ from unittest import skipUnless
 from django import forms
 from django.template import RequestContext
 
-from mezzanine.conf import settings
-from mezzanine.core.models import CONTENT_STATUS_PUBLISHED
-from mezzanine.forms import fields
-from mezzanine.forms.forms import FormForForm
-from mezzanine.forms.models import Form
-from mezzanine.utils.tests import TestCase
+from cemes.conf import settings
+from cemes.core.models import CONTENT_STATUS_PUBLISHED
+from cemes.forms import fields
+from cemes.forms.forms import FormForForm
+from cemes.forms.models import Form
+from cemes.utils.tests import TestCase
 
 
 class TestsForm(TestCase):

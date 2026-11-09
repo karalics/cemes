@@ -1,0 +1,115 @@
+{% load i18n static %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:"en" }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="csrf-token" content="{{ csrf_token }}">
+<title>{% block title %}{{ title }} | {{ site_title }}{% endblock %}</title>
+<link rel="stylesheet" href="{% static "cemes/admin_htmx/css/admin.css" %}">
+<script src="{% static "cemes/admin_htmx/js/htmx.min.js" %}" defer></script>
+<script src="{% static "cemes/admin_htmx/js/admin.js" %}" defer></script>
+<script src="{% static "cemes/admin_htmx/js/alpine.min.js" %}" defer></script>
+{% block extrahead %}{% endblock %}
+{% comment %}
+Django's admin widget scripts call gettext() as they load, so the
+JavaScript catalog has to come before the form media.
+{% endcomment %}
+<script src="{% url "admin_htmx:jsi18n" %}"></script>
+{% if media %}{{ media }}{% endif %}
+</head>
+<body class="{% block bodyclass %}{% endblock %}"
+      hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+<a class="skip-link" href="#content">{% trans "Skip to content" %}</a>
+
+<div class="shell" x-data="{ navOpen: window.innerWidth > 900 && {{ nav_collapsed|yesno:"false,true" }} }">
+
+  <header class="topbar">
+    <button class="nav-toggle" type="button" @click="navOpen = !navOpen"
+            :aria-expanded="navOpen.toString()" aria-controls="sidenav"
+            aria-label="{% trans "Toggle navigation" %}">
+      <span class="bars" aria-hidden="true"></span>
+    </button>
+    <a class="brand" href="{% url "admin_htmx:index" %}">{{ site_title }}</a>
+    <div class="topbar-right">
+      {% if available_sites %}
+        <form method="get" action="{% url "set_site" %}" class="site-switcher">
+          <label class="sr-only" for="site-select">{% trans "Site" %}</label>
+          <select id="site-select" name="site_id" onchange="this.form.submit()">
+            {% for site in available_sites %}
+              <option value="{{ site.id }}"
+                      {% if site.id == current_site_id %}selected{% endif %}>
+                {{ site.name }}</option>
+            {% endfor %}
+          </select>
+          <input type="hidden" name="next" value="{{ switch_site_next }}">
+          <noscript><button type="submit" class="button">{% trans "Switch" %}</button></noscript>
+        </form>
+      {% endif %}
+      <a class="topbar-link" href="/" target="_blank" rel="noopener">{% trans "View site" %}</a>
+      {% if user.is_authenticated %}
+        <span class="topbar-user">{% firstof user.get_short_name user.get_username %}</span>
+        <form method="post" action="{% url "admin_htmx:logout" %}" class="logout-form">
+          {% csrf_token %}
+          <button type="submit" class="topbar-link as-button">{% trans "Log out" %}</button>
+        </form>
+      {% endif %}
+    </div>
+  </header>
+
+  <nav id="sidenav" class="sidenav" :class="navOpen ? 'is-open' : ''"
+       aria-label="{% trans "Admin sections" %}">
+    {% for group in nav_groups %}
+      <div class="nav-group" x-data="{ open: {{ group.active|yesno:"true,true" }} }">
+        <button type="button" class="nav-group-title" @click="open = !open"
+                :aria-expanded="open.toString()">
+          <span>{{ group.name }}</span>
+          <span class="chev" :class="open ? 'down' : ''" aria-hidden="true"></span>
+        </button>
+        <ul x-show="open" x-cloak>
+          {% for model in group.models %}
+            <li class="{% if model.active %}active{% endif %}">
+              <a href="{{ model.admin_url }}">{{ model.name }}</a>
+              {% if model.add_url %}
+                <a class="nav-add" href="{{ model.add_url }}"
+                   title="{% blocktrans with name=model.name %}Add {{ name }}{% endblocktrans %}">+</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </nav>
+
+  <main id="content" class="content">
+    {% block breadcrumbs %}
+      <nav class="breadcrumbs" aria-label="{% trans "Breadcrumbs" %}">
+        <a href="{% url "admin_htmx:index" %}">{% trans "Home" %}</a>
+        {% if opts %}
+          <span aria-hidden="true">/</span>
+          <a href="{% url "admin_htmx:changelist" opts.app_label opts.model_name %}">
+            {{ opts.verbose_name_plural|capfirst }}</a>
+        {% endif %}
+        {% block breadcrumbs_extra %}{% endblock %}
+      </nav>
+    {% endblock %}
+
+    <div id="messages" class="messages" aria-live="polite">
+      {% for message in messages %}
+        <div class="message message-{{ message.tags }}" x-data
+             x-init="setTimeout(() => $el.remove(), 8000)">
+          {{ message }}
+          <button type="button" class="message-close" @click="$el.parentElement.remove()"
+                  aria-label="{% trans "Dismiss" %}">&times;</button>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% block content_title %}<h1>{{ title }}</h1>{% endblock %}
+    {% block content %}{% endblock %}
+  </main>
+
+</div>
+</body>
+</html>

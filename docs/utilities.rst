@@ -3,18 +3,18 @@ Utilities
 =========
 
 The following section documents general utilities available with
-Mezzanine. While these aren't a core part of Mezzanine itself,
-they're widely used across many areas of Mezzanine, and can be very
+Cemes. While these aren't a core part of Cemes itself,
+they're widely used across many areas of Cemes, and can be very
 useful in conjunction with your own custom content and features.
 
-Firstly covered are the utilities found in the :mod:`mezzanine.generic`
+Firstly covered are the utilities found in the :mod:`cemes.generic`
 app, such as :ref:`keywords`, :ref:`comments`, and :ref:`ratings`.
 Each of these form a common pattern:
 
   * A model is provided containing generic relationships using
     Django's `django.contrib.contenttypes <https://docs.djangoproject.com/en/dev/ref/contrib/contenttypes/>`_ app
   * A custom model field is provided for defining relationships to the
-    :mod:`mezzanine.generic` model, which can then be applied to any of
+    :mod:`cemes.generic` model, which can then be applied to any of
     your own models
   * The custom field injects extra fields onto your model, with
     de-normalized data populated on save
@@ -23,27 +23,27 @@ Each of these form a common pattern:
     applicable
 
 For a complete implementation reference, take a look at the built-in
-blog app :mod:`mezzanine.blog` which makes use of all these.
+blog app :mod:`cemes.blog` which makes use of all these.
 
 Lastly, some of the :ref:`templatetags` found within
-:mod:`mezzanine.core.templatetags.mezzanine_tags` are covered.
+:mod:`cemes.core.templatetags.cemes_tags` are covered.
 
 .. _keywords:
 
 Keywords
 ========
 
-Keywords provided by the :mod:`mezzanine.generic` app are pervasive
-throughout Mezzanine. They're assigned to both the :class:`.Page` model and
+Keywords provided by the :mod:`cemes.generic` app are pervasive
+throughout Cemes. They're assigned to both the :class:`.Page` model and
 the :class:`.Displayable` model from which it's derived. Given that these
-models form the foundation of most content within Mezzanine, more often
+models form the foundation of most content within Cemes, more often
 than not you're dealing with models that are already using keywords.
 
 Suppose we have a regular Django model though, such as our ``Book``
 example from the previous example in :doc:`content-architecture`::
 
     from django.db import models
-    from mezzanine.generic.fields import KeywordsField
+    from cemes.generic.fields import KeywordsField
 
     class Book(models.Model):
         author = models.ForeignKey("Author")
@@ -86,7 +86,7 @@ name given to the :class:`.KeywordsField` attribute on your model, which
 would be ``Book.keywords_string`` in the above example. Each time
 keywords change, the ``keywords_string`` field is populated with a
 comma separated string list of each of the keywords. This can be used
-in conjunction with Mezzanine's :doc:`search-engine` - behavior that is
+in conjunction with Cemes's :doc:`search-engine` - behavior that is
 provided by default for the :class:`.Page` and :class:`.Displayable` models.
 
 .. _comments:
@@ -94,9 +94,9 @@ provided by default for the :class:`.Page` and :class:`.Displayable` models.
 Threaded Comments
 =================
 
-Threaded comments provided by the :mod:`mezzanine.generic` app are an
+Threaded comments provided by the :mod:`cemes.generic` app are an
 extension of Django's `django_comments
-<https://github.com/django/django-contrib-comments>`_ app. Mezzanine's
+<https://github.com/django/django-contrib-comments>`_ app. Cemes's
 threaded comments fundamentally extend Django's comments to allow for
 threaded conversations, where comments can be made in reply to other
 comments.
@@ -106,7 +106,7 @@ conversations to our book pages in templates, we first define comments
 on the ``Book`` model::
 
     from django.db import models
-    from mezzanine.generic.fields import CommentsField
+    from cemes.generic.fields import CommentsField
 
     class Book(models.Model):
         author = models.ForeignKey("Author")
@@ -141,14 +141,14 @@ controlled by setting the :ref:`COMMENTS_ACCOUNT_REQUIRED` setting to
 on submitting a comment, the user will be redirected to the
 login/signup page, where after logging in, their comment will be posted
 without having to re-submit it. See the :doc:`user-accounts` section
-for full details on configuring public user accounts in Mezzanine.
+for full details on configuring public user accounts in Cemes.
 
 .. _ratings:
 
 Ratings
 =======
 
-The ratings provided by the :mod:`mezzanine.generic` app allow people to
+The ratings provided by the :mod:`cemes.generic` app allow people to
 give a rating for any model that has ratings set up. Suppose we wanted
 to allow people to rate our books from 1 to 10, first we define what
 the rating range is via the :ref:`RATINGS_RANGE` setting::
@@ -158,7 +158,7 @@ the rating range is via the :ref:`RATINGS_RANGE` setting::
 And then add ratings to our ``Book`` model::
 
     from django.db import models
-    from mezzanine.generic.fields import RatingField
+    from cemes.generic.fields import RatingField
 
     class Book(models.Model):
         author = models.ForeignKey("Author")
@@ -177,7 +177,7 @@ current average rating, and a form with radio buttons for rating. You
 may wish to customize this and use visual icons, like stars, for the
 ratings.
 
-Like the other custom fields in :mod:`mezzanine.generic`, the
+Like the other custom fields in :mod:`cemes.generic`, the
 :class:`.RatingField` will inject fields derived from its attribute name
 onto the model which it's assigned to, which are updated when a new
 rating is made. Given our ``Book`` example, the :class:`.RatingField` would
@@ -196,7 +196,7 @@ General Template Tags
 =====================
 
 Following are some template tags defined in
-:mod:`mezzanine.core.templatetags.mezzanine_tags` - they're general
+:mod:`cemes.core.templatetags.cemes_tags` - they're general
 purpose and can be used across a variety of scenarios.
 
 :func:`.fields_for`
@@ -206,9 +206,9 @@ The :func:`.fields_for` template tag is a simple tag that takes a form object
 as its single argument, and renders the fields for the form. It uses the
 template ``core/templates/includes/form_fields.html``, which can then be
 overridden to customize the look and feel of all forms throughout a
-Mezzanine site::
+Cemes site::
 
-    {% load mezzanine_tags %}
+    {% load cemes_tags %}
 
     <form method="POST">
         {% fields_for some_form_object %}
@@ -226,7 +226,7 @@ object and renders any error messages with the template
 ``core/templates/includes/form_errors.html``. It plays well with
 :func:`.fields_for`::
 
-    {% load mezzanine_tags %}
+    {% load cemes_tags %}
 
     {% errors_for some_form_object %}
     <form method="POST">
@@ -248,7 +248,7 @@ Here's an example with the :func:`.keywords_for` tag described above, which
 assigns an :func:`.item_count` attribute to each keyword returned to the
 template::
 
-    {% load mezzanine_tags keywords_tags %}
+    {% load cemes_tags keywords_tags %}
 
     {% keywords_for book as keywords %}
     {% for keyword in keywords|sort_by:"item_count" %}
@@ -272,7 +272,7 @@ Given our book example's ``Book.cover`` field, suppose we wanted
 to render cover thumbnails with a 100 pixel width, and proportional
 height::
 
-    {% load mezzanine_tags %}
+    {% load cemes_tags %}
 
     <img src="{{ MEDIA_URL }}{% thumbnail book.cover 100 0 %}">
 

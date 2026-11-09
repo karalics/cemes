@@ -3,10 +3,10 @@ Twitter Integration
 ===================
 
 .. deprecated:: 5.0
-   :mod:`mezzanine.twitter` has been deprecated and will be removed in a
+   :mod:`cemes.twitter` has been deprecated and will be removed in a
    future version.
 
-The :mod:`mezzanine.twitter` application exposes the ability to consume,
+The :mod:`cemes.twitter` application exposes the ability to consume,
 store, and display your own tweets on your site in an efficient manner,
 as well as the ability to send tweets when publishing new content to
 the site.
@@ -30,7 +30,7 @@ job for polling Twitter by default.
 As of June 2013, Twitter also requires that all API access is
 authenticated. For this you'll need to configure a Twitter application
 with OAuth credentials for your site to access the Twitter API. These
-credentials are configurable as Mezzanine settings. See the
+credentials are configurable as Cemes settings. See the
 :doc:`configuration` section for more information on these, as well as
 the `Twitter developer site <https://dev.twitter.com/>`_ for info on
 creating an application and configuring your OAuth credentials.
@@ -44,7 +44,7 @@ the permissions your OAuth credentials have against the Twitter API. To
 consume Twitter feeds, only read permissions are needed, but you may
 also choose to allow both read and write permissions. With write
 permissions enabled, you'll then also be able to expose the option in
-Mezzanine's admin interface for automatically tweeting new blog posts
+Cemes's admin interface for automatically tweeting new blog posts
 (or your own custom content) when they're published.
 
 To enable this, simply install the `python-twitter
@@ -54,5 +54,5 @@ have a "Send to Twitter" checkbox, which when checked, will send a tweet
 with the post's title and URL.
 
 You can also add this functionality to your own admin classes by making
-use of :class:`mezzanine.twitter.admin.TweetableAdminMixin`. See
-:class:`mezzanine.blog.admin.BlogPostAdmin` for an example.
+use of :class:`cemes.twitter.admin.TweetableAdminMixin`. See
+:class:`cemes.blog.admin.BlogPostAdmin` for an example.

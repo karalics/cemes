@@ -6,7 +6,7 @@ from pathlib import Path
 
 import django
 
-# Path to the temp mezzanine project folder
+# Path to the temp cemes project folder
 TMP_PATH = Path(tempfile.mkdtemp()) / "project_template"
 
 TEST_SETTINGS = """
@@ -18,8 +18,8 @@ globals().update(i for i in settings.__dict__.items() if i[0].isupper())
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS.append("tests")
 
-if "mezzanine.accounts" not in INSTALLED_APPS:
-    INSTALLED_APPS.append("mezzanine.accounts")
+if "cemes.accounts" not in INSTALLED_APPS:
+    INSTALLED_APPS.append("cemes.accounts")
 
 # Use the MD5 password hasher by default for quicker test runs.
 PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher',)
@@ -30,16 +30,16 @@ def pytest_report_header(config):
     """
     Have pytest report the path of the project folder
     """
-    return f"mezzanine proj (tmp): {TMP_PATH}"
+    return f"cemes proj (tmp): {TMP_PATH}"
 
 
 def pytest_configure():
     """
     Hack the `project_template` dir into an actual project to test against.
     """
-    from mezzanine.utils.importing import path_for_import
+    from cemes.utils.importing import path_for_import
 
-    template_path = Path(path_for_import("mezzanine")) / "project_template"
+    template_path = Path(path_for_import("cemes")) / "project_template"
     shutil.copytree(str(template_path), str(TMP_PATH))
     proj_path = TMP_PATH / "project_name"
     local_settings = (proj_path / "local_settings.py.template").read_text()

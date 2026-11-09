@@ -15,29 +15,29 @@ Created by `Stephen McDonald <http://twitter.com/stephen_mcd>`_
 Overview
 ========
 
-Mezzanine is a powerful, consistent, and flexible content management
-platform. Built using the `Django`_ framework, Mezzanine provides a
+Cemes is a powerful, consistent, and flexible content management
+platform. Built using the `Django`_ framework, Cemes provides a
 simple yet highly extensible architecture that encourages diving in
-and hacking on the code. Mezzanine is `BSD licensed`_ and supported by
+and hacking on the code. Cemes is `BSD licensed`_ and supported by
 a diverse and active community.
 
-In some ways, Mezzanine resembles tools such as `Wordpress`_,
+In some ways, Cemes resembles tools such as `Wordpress`_,
 providing an intuitive interface for managing pages, blog posts, form
-data, store products, and other types of content. But Mezzanine is
+data, store products, and other types of content. But Cemes is
 also different. Unlike many other platforms that make extensive use of
-modules or reusable applications, Mezzanine provides most of its
+modules or reusable applications, Cemes provides most of its
 functionality by default. This approach yields a more integrated and
 efficient platform.
 
-Visit the `Mezzanine project page`_ to see some of the `great sites
-people have built using Mezzanine`_.
+Visit the `Cemes project page`_ to see some of the `great sites
+people have built using Cemes`_.
 
 Features
 ========
 
 In addition to the usual features provided by Django such as MVC
 architecture, ORM, templating, caching and an automatic admin
-interface, Mezzanine provides the following:
+interface, Cemes provides the following:
 
 * Hierarchical page navigation
 * Save as draft and preview on site
@@ -69,7 +69,7 @@ interface, Mezzanine provides the following:
 * `Akismet`_ spam filtering
 * `JVM`_ compatible (via `Jython`_)
 
-The Mezzanine admin dashboard:
+The Cemes admin dashboard:
 
 .. image:: http://mezzanine.jupo.org/docs/_images/dashboard.png
 
@@ -81,7 +81,7 @@ To **report a security issue**, please send an email privately to
 `core-team@mezzaninecms.com`_. This gives us a chance to fix the issue
 and create an official release prior to the issue being made public.
 
-For **all other Mezzanine support**, the primary channel is the
+For **all other Cemes support**, the primary channel is the
 `mezzanine-users`_ mailing list. Questions, comments, issues, feature
 requests, and all other related discussions should take place here.
 
@@ -96,14 +96,14 @@ used, such as operating system, database, and Python version. If
 the mailing list first.
 
 Finally, feel free to drop by the `#mezzanine IRC channel`_ on
-`Freenode`_, for a chat! Lastly, communications in all Mezzanine spaces
+`Freenode`_, for a chat! Lastly, communications in all Cemes spaces
 are expected to conform to the `Django Code of Conduct`_.
 
 
 Contributing
 ============
 
-Mezzanine is an open source project managed using both the Git and
+Cemes is an open source project managed using both the Git and
 Mercurial version control systems. These repositories are hosted on
 both `GitHub`_ and `Bitbucket`_ respectively, so contributing is as
 easy as forking the project on either of these sites and committing
@@ -114,34 +114,34 @@ Donating
 ========
 
 If you would like to make a donation to continue development of
-Mezzanine, you can do so via the `Mezzanine Project`_ website.
+Cemes, you can do so via the `Cemes Project`_ website.
 
 
 Quotes
 ======
 
-* "I'm enjoying working with Mezzanine, it's good work"
+* "I'm enjoying working with Cemes, it's good work"
   - `Van Lindberg`_, `Python Software Foundation`_ chairman
-* "Mezzanine looks like it may be Django's killer app"
+* "Cemes looks like it may be Django's killer app"
   - `Antonio Rodriguez`_, ex CTO of `Hewlett Packard`_, founder
   of `Tabblo`_
-* "Mezzanine looks pretty interesting, tempting to get me off
+* "Cemes looks pretty interesting, tempting to get me off
   Wordpress" - `Jesse Noller`_, Python core contributor,
   `Python Software Foundation`_ board member
 * "I think I'm your newest fan. Love these frameworks"
   - `Emile Petrone`_, integrations engineer at `Urban Airship`_
-* "Mezzanine is amazing" - `Audrey Roy`_, founder of `PyLadies`_
+* "Cemes is amazing" - `Audrey Roy`_, founder of `PyLadies`_
   and `Django Packages`_
-* "Mezzanine convinced me to switch from the Ruby world over
+* "Cemes convinced me to switch from the Ruby world over
   to Python" - `Michael Delaney`_, developer
-* "Like Linux and Python, Mezzanine just feels right" - `Phil Hughes`_,
+* "Like Linux and Python, Cemes just feels right" - `Phil Hughes`_,
   Linux For Dummies author, `The Linux Journal`_ columnist
-* "Impressed with Mezzanine so far" - `Brad Montgomery`_, founder
+* "Impressed with Cemes so far" - `Brad Montgomery`_, founder
   of `Work For Pie`_
-* "From the moment I installed Mezzanine, I have been delighted, both
+* "From the moment I installed Cemes, I have been delighted, both
   with the initial experience and the community involved in its
   development" - `John Campbell`_, founder of `Head3 Interactive`_
-* "You need to check out the open source project Mezzanine. In one
+* "You need to check out the open source project Cemes. In one
   word: Elegant" - `Nick Hagianis`_, developer
 
 
@@ -149,8 +149,8 @@ Quotes
 .. _`Django Code of Conduct`: https://www.djangoproject.com/conduct/
 .. _`Wordpress`: http://wordpress.org/
 .. _`BSD licensed`: http://www.linfo.org/bsdlicense.html
-.. _`great sites people have built using Mezzanine`: http://mezzanine.jupo.org/sites/
-.. _`Mezzanine project page`: http://mezzanine.jupo.org
+.. _`great sites people have built using Cemes`: http://mezzanine.jupo.org/sites/
+.. _`Cemes project page`: http://mezzanine.jupo.org
 .. _`In-line page editing`: http://mezzanine.jupo.org/docs/inline-editing.html
 .. _`custom content types`: http://mezzanine.jupo.org/docs/content-architecture.html#creating-custom-content-types
 .. _`Cartridge`: http://cartridge.jupo.org/
@@ -170,11 +170,11 @@ Quotes
 .. _`GitHub`: http://github.com/stephenmcd/mezzanine/
 .. _`Bitbucket`: http://bitbucket.org/stephenmcd/mezzanine/
 .. _`mezzanine-users`: http://groups.google.com/group/mezzanine-users/topics
-.. _`core-team@mezzaninecms.com`: mailto:core-team@mezzaninecms.com?subject=Mezzanine+Security+Issue
+.. _`core-team@mezzaninecms.com`: mailto:core-team@mezzaninecms.com?subject=Cemes+Security+Issue
 .. _`GitHub issue tracker`: http://github.com/stephenmcd/mezzanine/issues
 .. _`#mezzanine IRC channel`: irc://irc.freenode.net/mezzanine
 .. _`Freenode`: http://freenode.net
-.. _`Mezzanine Project`: http://mezzanine.jupo.org
+.. _`Cemes Project`: http://mezzanine.jupo.org
 
 .. _`Python Software Foundation`: http://www.python.org/psf/
 .. _`Urban Airship`: http://urbanairship.com/

@@ -2,33 +2,33 @@
 Caching Strategy
 ================
 
-Mezzanine takes great care to appropriately minimize database queries.
-This strategy enables Mezzanine to perform well without a caching
+Cemes takes great care to appropriately minimize database queries.
+This strategy enables Cemes to perform well without a caching
 configuration. However, caching is also well-supported in the event
-that you wish to implement customized caching for your Mezzanine site.
-Mezzanine is preconfigured to cache aggressively when deployed to a
+that you wish to implement customized caching for your Cemes site.
+Cemes is preconfigured to cache aggressively when deployed to a
 production site with a cache backend installed.
 
 Cache Middleware
 ================
 
-Mezzanine's caching system employs a hybrid approach which draws from
+Cemes's caching system employs a hybrid approach which draws from
 several popular caching techniques and combines them into one overall
-implementation. Mezzanine provides its own implementation of `Django's
+implementation. Cemes provides its own implementation of `Django's
 page-level cache middleware
 <https://docs.djangoproject.com/en/dev/topics/cache/#the-per-site-
 cache>`_, and behaves in a similar way.
 
 Pages are fetched from cache by
-:class:`mezzanine.core.middleware.FetchFromCacheMiddleware`, which should
+:class:`cemes.core.middleware.FetchFromCacheMiddleware`, which should
 appear at the end of the :django:setting:`MIDDLEWARE` setting and therefore
 be activated at the end of the request phase. If a cache miss occurs,
 the request is marked as requiring a cache update, which is handled by
-:class:`mezzanine.core.middleware.UpdateCacheMiddleware`, which in turn
+:class:`cemes.core.middleware.UpdateCacheMiddleware`, which in turn
 should appear at the start of :django:setting:`MIDDLEWARE` and therefore
 be activated at the end of the response phase.
 
-Mezzanine's cache middleware differs from its Django counterpart in
+Cemes's cache middleware differs from its Django counterpart in
 a few subtle yet significant ways:
 
   * Setting ``CACHE_ANONYMOUS_ONLY`` to ``False`` will have no effect,
@@ -50,7 +50,7 @@ define the sections of a template that should not be cached. These
 sections might be anything that makes use of the current request
 object, including session-specific data.
 
-Accordingly, Mezzanine provides the start and end template tags
+Accordingly, Cemes provides the start and end template tags
 ``nevercache`` and ``endnevercache``. Content wrapped in these tags
 will not be cached. With two-phased
 rendering, the page is cached without any of the template code
@@ -59,7 +59,7 @@ phase. The second phase then occurs after the page is retrieved from
 cache (or not), and any template code inside ``nevercache`` and
 ``endnevercache`` is then executed.
 
-Mezzanine's two-phased rendering is based on Cody Soyland's
+Cemes's two-phased rendering is based on Cody Soyland's
 `django-phased <https://github.com/codysoyland/django-phased>`_ and
 Adrian Holovaty's `blog post
 <http://www.holovaty.com/writing/django-two-phased-rendering/>`_ which
@@ -71,7 +71,7 @@ originally described the technique.
     only have access to template tags and variables provided by a
     normal request context, with the exception of any variables passed
     to the template from a view function. Variables added via context
-    processors such as the current request and via Mezzanine's
+    processors such as the current request and via Cemes's
     settings will be available. Template tag libraries should be
     loaded inside these areas of content so as to make use of their
     template tags.
@@ -79,10 +79,10 @@ originally described the technique.
 Mint Cache
 ==========
 
-The final step in Mezzanine's caching strategy involves a technique
+The final step in Cemes's caching strategy involves a technique
 known as mint caching, in which the expiry value for any cache entry
 is stored in cache along with the cache entry itself. The real expiry
-value used is the given expiry plus the value defined by Mezzanine's
+value used is the given expiry plus the value defined by Cemes's
 :ref:`CACHE_SET_DELAY_SECONDS` setting. Each time a cache entry is
 requested, the original expiry time is checked, and, if the expiry
 time has passed, the stale cache entry is placed back into the cache
@@ -93,6 +93,6 @@ caller can know to regenerate the cache entry. This approach ensures
 that cache misses never actually occur and that (almost) only one
 client will ever perform regeneration of a cache entry.
 
-Mezzanine's mint cache is based on `this snippet
+Cemes's mint cache is based on `this snippet
 <http://djangosnippets.org/snippets/793/>`_ created by
 `Disqus <http://disqus.com>`_.

@@ -5,10 +5,10 @@ from django.forms.fields import DateField, DateTimeField
 from django.urls import reverse
 from django.utils.http import int_to_base36
 
-from mezzanine.accounts import ProfileNotConfigured
-from mezzanine.accounts.forms import ProfileForm
-from mezzanine.conf import settings
-from mezzanine.utils.tests import TestCase
+from cemes.accounts import ProfileNotConfigured
+from cemes.accounts.forms import ProfileForm
+from cemes.conf import settings
+from cemes.utils.tests import TestCase
 
 User = get_user_model()
 

@@ -3,14 +3,14 @@ Model Customization
 ===================
 
 So far under :doc:`content-architecture` the concept of subclassing
-Mezzanine's models has been described. This section describes the hooks
-Mezzanine provides for directly modifying the behaviour of its models.
+Cemes's models has been described. This section describes the hooks
+Cemes provides for directly modifying the behaviour of its models.
 
 Field Injection
 ===============
 
-Mezzanine provides the setting :ref:`EXTRA_MODEL_FIELDS` which allows you
-to define a sequence of fields that will be injected into Mezzanine's
+Cemes provides the setting :ref:`EXTRA_MODEL_FIELDS` which allows you
+to define a sequence of fields that will be injected into Cemes's
 (or any library's) models.
 
 .. note::
@@ -27,14 +27,14 @@ args and a dictionary of keyword args, to use when creating the field
 instance.
 
 For example suppose you want to inject a custom ``ImageField`` from a
-third party library into Mezzanine's :class:`.BlogPost` model, you would
+third party library into Cemes's :class:`.BlogPost` model, you would
 define the following in your project’s settings module::
 
     EXTRA_MODEL_FIELDS = (
         # Four-item sequence for one field injected.
         (
             # Dotted path to field.
-            "mezzanine.blog.models.BlogPost.image",
+            "cemes.blog.models.BlogPost.image",
             # Dotted path to field class.
             "somelib.fields.ImageField",
             # Positional args for field class.
@@ -47,21 +47,21 @@ define the following in your project’s settings module::
 Each :class:`.BlogPost` instance will now have an ``image`` attribute, using the
 ``ImageField`` class defined in the fictitious ``somelib.fields`` module.
 
-Another interesting example would be adding a field to all of Mezzanine's
+Another interesting example would be adding a field to all of Cemes's
 content types by injecting fields into the :class:`.Page` class. Continuing on
 from the previous example, suppose you wanted to add a regular Django
 ``IntegerField`` to all content types::
 
     EXTRA_MODEL_FIELDS = (
         (
-            "mezzanine.blog.models.BlogPost.image",
+            "cemes.blog.models.BlogPost.image",
             "somelib.fields.ImageField",
             ("Image",),
             {"blank": True, "upload_to": "blog"},
         ),
-        # Example of adding a field to *all* of Mezzanine's content types:
+        # Example of adding a field to *all* of Cemes's content types:
         (
-            "mezzanine.pages.models.Page.another_field",
+            "cemes.pages.models.Page.another_field",
             "IntegerField", # 'django.db.models.' is implied if path is omitted.
             ("Another name",),
             {"blank": True, "default": 1},
@@ -83,7 +83,7 @@ however some extra consideration is required when used with the
 migrations management commands included in Django starting from
 version 1.7. In the first example above, Django's ``makemigrations``
 command views the new ``image`` field on the
-:class:`.BlogPost` model of the :mod:`mezzanine.blog` app. As such, in order to
+:class:`.BlogPost` model of the :mod:`cemes.blog` app. As such, in order to
 create a migration for it, the migration must be created for the ``blog``
 app itself and by default would end up in the migrations directory of
 the ``blog`` app, which completely goes against the notion of not
@@ -153,8 +153,8 @@ desired position.::
 
     from copy import deepcopy
     from django.contrib import admin
-    from mezzanine.blog.admin import BlogPostAdmin
-    from mezzanine.blog.models import BlogPost
+    from cemes.blog.admin import BlogPostAdmin
+    from cemes.blog.models import BlogPost
 
     blog_fieldsets = deepcopy(BlogPostAdmin.fieldsets)
     blog_fieldsets[0][1]["fields"].insert(-2, "image")
